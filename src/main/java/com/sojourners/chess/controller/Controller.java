@@ -405,38 +405,39 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     }
 
     @FXML
-public void canvasClick(MouseEvent event) {
+    public void canvasClick(MouseEvent event) {
 
-    // Chuột trái: chọn & đi quân trên TCHESS
-    if (event.getButton() == MouseButton.PRIMARY) {
+        // Chuột trái: chọn & đi quân trên TCHESS
+        if (event.getButton() == MouseButton.PRIMARY) {
 
-        // LUÔN cho phép cả đỏ lẫn đen được chọn / đi
-        // => canRedGo = true, canBlackGo = true
-        String move = board.mouseClick(
-                (int) event.getX(),
-                (int) event.getY(),
-                true,  // always allow red pieces
-                true   // always allow black pieces
-        );
+            // [MODIFIED] LUÔN cho phép cả đỏ lẫn đen được chọn / đi (cả trong 观战模式)
+            // Việc thiết lập (true, true) cho phép người dùng điều khiển quân cờ trực tiếp
+            // ngay cả khi engine hoặc linker đang chạy.
+            String move = board.mouseClick(
+                    (int) event.getX(),
+                    (int) event.getY(),
+                    true,  // always allow red pieces
+                    true   // always allow black pieces
+            );
 
-        // Nếu tạo được nước đi hợp lệ thì cập nhật lại trạng thái ván cờ
-        if (move != null) {
-            goCallBack(move);
+            // Nếu tạo được nước đi hợp lệ thì cập nhật lại trạng thái ván cờ
+            if (move != null) {
+                goCallBack(move);
+            }
+
+            // Ẩn menu chuột phải (nếu đang mở)
+            BoardContextMenu.getInstance().hide();
+
+            // Chuột phải: hiện menu context (copy/paste FEN, đổi bên đi, v.v.)
+        } else if (event.getButton() == MouseButton.SECONDARY) {
+            BoardContextMenu.getInstance().show(
+                    this.canvas,
+                    Side.RIGHT,
+                    event.getX() - this.canvas.widthProperty().doubleValue(),
+                    event.getY()
+            );
         }
-
-        // Ẩn menu chuột phải (nếu đang mở)
-        BoardContextMenu.getInstance().hide();
-
-    // Chuột phải: hiện menu context (copy/paste FEN, đổi bên đi, v.v.)
-    } else if (event.getButton() == MouseButton.SECONDARY) {
-        BoardContextMenu.getInstance().show(
-                this.canvas,
-                Side.RIGHT,
-                event.getX() - this.canvas.widthProperty().doubleValue(),
-                event.getY()
-        );
     }
-}
 
     
     private void goCallBack(String move) {
