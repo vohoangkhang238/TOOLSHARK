@@ -117,67 +117,73 @@ public class WindowsGraphLinker extends AbstractGraphLinker implements MouseList
         return (hiWord << 16) | (loWord & 0xFFFF);
     }
 
-    private BufferedImage capture(WinDef.HWND hWnd, Rectangle rect) {
-        // 创建与窗口相关联的设备上下文和一个内存设备上下文以执行离屏渲染
-        WinDef.HDC hdcWindow = User32.INSTANCE.GetDC(hWnd);
-        WinDef.HDC hdcMemDC = GDI32.INSTANCE.CreateCompatibleDC(hdcWindow);
-        try {
-            int width, height;
-            WinDef.RECT bounds = new WinDef.RECT();
-            User32.INSTANCE.GetClientRect(hWnd, bounds);
-            width = bounds.right - bounds.left;
-            height = bounds.bottom - bounds.top;
-            // 处理windows缩放问题
-            if (needScaling) {
-                width /= screenScalingFactor;
-                height /= screenScalingFactor;
-            }
-            // 创建兼容的位图，并且将其选入内存设备上下文
-            WinDef.HBITMAP hBitmap = GDI32.INSTANCE.CreateCompatibleBitmap(hdcWindow, width, height);
-            WinNT.HANDLE hOld = GDI32.INSTANCE.SelectObject(hdcMemDC, hBitmap);
-            // 请求窗口自行完成绘制工作
-            if (!User32.INSTANCE.PrintWindow(hWnd, hdcMemDC, 0x1 | 0x2)) {
-                return null;
-            }
+    // Trong file WindowsGraphLinker.java
 
-            // 将所绘制的位图转化为Java缓冲图片（BufferedImage）
-            BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-            WinGDI.BITMAPINFO bmi = new WinGDI.BITMAPINFO();
-            bmi.bmiHeader.biWidth = width;
-            bmi.bmiHeader.biHeight = -height; // 注意：biHeight为负表示顶向下DIB
-            bmi.bmiHeader.biPlanes = 1;
-            bmi.bmiHeader.biBitCount = 32;
-            bmi.bmiHeader.biCompression = WinGDI.BI_RGB;
+private BufferedImage capture(WinDef.HWND hWnd, Rectangle rect) {
+    WinDef.HDC hdcWindow = User32.INSTANCE.GetDC(hWnd);
+    WinDef.HDC hdcMemDC = GDI32.INSTANCE.CreateCompatibleDC(hdcWindow);
+    
+    // Đưa khai báo ra ngoài để finally có thể truy cập
+    WinDef.HBITMAP hBitmap = null;
+    WinNT.HANDLE hOld = null;
 
-            Memory buffer = new Memory(width * height * 4);
-            GDI32.INSTANCE.GetDIBits(hdcMemDC, hBitmap, 0, height, buffer, bmi, WinGDI.DIB_RGB_COLORS);
-
-            int[] data = buffer.getIntArray(0, width * height);
-            image.setRGB(0, 0, width, height, data, 0, width);
-
-            // 清理资源
-            GDI32.INSTANCE.SelectObject(hdcMemDC, hOld);
-            GDI32.INSTANCE.DeleteObject(hBitmap);
-
-            if (rect != null) {
-                width = (int) rect.getWidth();
-                height = (int) rect.getHeight();
-                int x = rect.x;
-                int y = rect.y;
-                image = image.getSubimage(x, y, width, height);
-            }
-
-            return image;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            // 清理设备上下文对象
-            GDI32.INSTANCE.DeleteDC(hdcMemDC);
-            User32.INSTANCE.ReleaseDC(hWnd, hdcWindow);
+    try {
+        int width, height;
+        WinDef.RECT bounds = new WinDef.RECT();
+        User32.INSTANCE.GetClientRect(hWnd, bounds);
+        width = bounds.right - bounds.left;
+        height = bounds.bottom - bounds.top;
+        
+        if (needScaling) {
+            width /= screenScalingFactor;
+            height /= screenScalingFactor;
         }
+
+        hBitmap = GDI32.INSTANCE.CreateCompatibleBitmap(hdcWindow, width, height);
+        hOld = GDI32.INSTANCE.SelectObject(hdcMemDC, hBitmap);
+
+        // Nếu PrintWindow thất bại -> return null -> Code cũ sẽ bị LEAK hBitmap ở đây!
+        if (!User32.INSTANCE.PrintWindow(hWnd, hdcMemDC, 0x1 | 0x2)) {
+            return null; 
+        }
+
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        // ... (Giữ nguyên đoạn code xử lý ảnh BMI/GetDIBits cũ) ...
+        WinGDI.BITMAPINFO bmi = new WinGDI.BITMAPINFO();
+        bmi.bmiHeader.biWidth = width;
+        bmi.bmiHeader.biHeight = -height;
+        bmi.bmiHeader.biPlanes = 1;
+        bmi.bmiHeader.biBitCount = 32;
+        bmi.bmiHeader.biCompression = WinGDI.BI_RGB;
+        Memory buffer = new Memory(width * height * 4);
+        GDI32.INSTANCE.GetDIBits(hdcMemDC, hBitmap, 0, height, buffer, bmi, WinGDI.DIB_RGB_COLORS);
+        int[] data = buffer.getIntArray(0, width * height);
+        image.setRGB(0, 0, width, height, data, 0, width);
+
+        // ... (Giữ nguyên đoạn cắt ảnh rect != null) ...
+        if (rect != null) {
+            width = (int) rect.getWidth();
+            height = (int) rect.getHeight();
+            image = image.getSubimage(rect.x, rect.y, width, height);
+        }
+
+        return image;
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    } finally {
+        // FIX QUAN TRỌNG: Luôn xóa hBitmap dù có lỗi hay return sớm
+        if (hBitmap != null) {
+            if (hOld != null) {
+                GDI32.INSTANCE.SelectObject(hdcMemDC, hOld);
+            }
+            GDI32.INSTANCE.DeleteObject(hBitmap); // Phải xóa cái này nếu không sẽ tràn bộ nhớ
+        }
+        GDI32.INSTANCE.DeleteDC(hdcMemDC);
+        User32.INSTANCE.ReleaseDC(hWnd, hdcWindow);
     }
+}
 
     private void selectCursor() {
         WinDef.HCURSOR h = User32Extra.INSTANCE.LoadCursorFromFileA(PathUtils.getJarPath() + "ui/circle.ico");

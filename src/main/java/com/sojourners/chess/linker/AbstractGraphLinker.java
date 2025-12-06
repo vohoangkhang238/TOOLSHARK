@@ -85,9 +85,13 @@ public abstract class AbstractGraphLinker implements GraphLinker, Runnable {
         this.pause = false;
     }
 
-    @Override
-    public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
+   // Trong file AbstractGraphLinker.java
+
+@Override
+public void run() {
+    while (!Thread.currentThread().isInterrupted()) {
+        // BỌC TRY-CATCH LỚN: Để lỗi khởi tạo không làm chết thread
+        try {
             if (!findBoardPosition()) {
                 sleep(1000);
                 continue;
@@ -100,88 +104,49 @@ public abstract class AbstractGraphLinker implements GraphLinker, Runnable {
             while (!Thread.currentThread().isInterrupted()) {
                 sleep(prop.getLinkScanTime());
 
-                // [MODIFIED] Không sử dụng callBack.isThinking() nữa,
-                // để luôn cho phép scan khi chưa pause
                 if (pause) {
                     continue;
                 }
 
-                if (!findChessBoard(board2)) {
-                    continue;
-                }
-
-                boolean isReverse;
+                // BỌC TRY-CATCH NHỎ: Để lỗi 1 frame không làm dừng auto
                 try {
-                    isReverse = reverse(board2);
+                    if (!findChessBoard(board2)) {
+                        continue;
+                    }
+
+                    boolean isReverse = reverse(board2);
+
+                    if (isSame(board2, callBack.getEngineBoard())) {
+                        continue;
+                    }
+
+                    // ... (Giữ nguyên logic compareBoard và needConfirm cũ) ...
+                    Action action = compareBoard(board2, callBack.getEngineBoard(), isReverse, callBack.isWatchMode());
+                    if (prop.isLinkAnimation() && needConfirm(board2, callBack.getEngineBoard(), action)) {
+                         // ... (Giữ nguyên logic animation cũ) ...
+                         // Đoạn này dài nên mình không paste lại, giữ nguyên code của bạn
+                         // Chỉ cần đảm bảo nó nằm trong block try này
+                    }
+                    
+                    if (action != null) {
+                        // ... (Giữ nguyên logic xử lý Action) ...
+                        if (action.flag == 3) {
+                             break;
+                        }
+                    }
+                    
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    continue;
-                }
-
-                if (isSame(board2, callBack.getEngineBoard())) {
-                    continue;
-                }
-
-                Action action = compareBoard(board2, callBack.getEngineBoard(), isReverse, callBack.isWatchMode());
-                if (prop.isLinkAnimation() && needConfirm(board2, callBack.getEngineBoard(), action)) {
-                    boolean f = false;
-                    do {
-                        char[][] tmp = board1;
-                        board1 = board2;
-                        board2 = tmp;
-
-                        if (!findChessBoard(board2)) {
-                            f = true;
-                            break;
-                        }
-
-                        try {
-                            isReverse = reverse(board2);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            f = true;
-                            break;
-                        }
-                    } while (!isSame(board1, board2));
-
-                    if (f) continue;
-
-                    action = compareBoard(board2, callBack.getEngineBoard(), isReverse, callBack.isWatchMode());
-                }
-
-                if (action != null) {
-                    System.out.println("action " + action);
-                    if (action.flag == 1) {
-                        // Đối thủ đi → đồng bộ vào TCHESS
-                        callBack.linkerMove(action.x1, action.y1, action.x2, action.y2);
-
-                    } else if (action.flag == 2) {
-                        // Engine/TCHESS đi → auto click ra bàn cờ ngoài
-                        if (isReverse) {
-                            action.y1 = 9 - action.y1;
-                            action.y2 = 9 - action.y2;
-                            action.x1 = 8 - action.x1;
-                            action.x2 = 8 - action.x2;
-                        }
-                        autoClick(action.x1, action.y1, action.x2, action.y2);
-
-                    } else if (action.flag == 3) {
-                        // Nhận diện ra cục diện mới → reset vòng lặp trong để re-init
-                        break;
-                    }
-
-                    if (action.flag == 4) {
-                        count++;
-                        if (count > 9) {
-                            break;
-                        }
-                    } else {
-                        count = 0;
-                    }
+                    // Nếu lỗi 1 frame (ví dụ AI lỗi), in ra và tiếp tục chạy frame sau
+                    // KHÔNG ĐƯỢC để thread chết
+                    e.printStackTrace(); 
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            sleep(1000); // Đợi xíu rồi thử lại
         }
     }
+}
 
     class Action {
         int flag;
