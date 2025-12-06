@@ -11,4 +11,7 @@ public interface LinkerCallBack {
     boolean isWatchMode();
 
     void linkerMove(int x1, int y1, int x2, int y2);
+    
+    // [FIX] Thêm phương thức isReverse() để cho phép Linker truy vấn trạng thái lật board.
+    boolean isReverse(); 
 }

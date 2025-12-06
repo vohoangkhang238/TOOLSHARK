@@ -106,24 +106,35 @@ public abstract class AbstractGraphLinker implements GraphLinker, Runnable {
                     continue;
                 }
 
+                // --- MODIFIED COOLDOWN CHECK: Bắt đầu cooldown ---
+                if (this.count > 0) { 
+                    this.count--; 
+                    if (this.count > 0) { 
+                        continue; // Skip scan during cooldown
+                    }
+                }
+                // --- END COOLDOWN CHECK ---
+
+
                 if (!findChessBoard(board2)) {
                     continue;
                 }
 
-                boolean isReverse;
-                try {
-                    isReverse = reverse(board2);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                // [MODIFIED] Lấy trạng thái lật từ UI (Controller)
+                boolean isReverse = callBack.isReverse(); 
+                char[][] boardToCompare = board2;
+                
+                // [MODIFIED] If UI is reversed, flip the scanned board (board2) before comparison
+                if (isReverse) {
+                    boardToCompare = applyReverse(board2); 
+                }
+
+                if (isSame(boardToCompare, callBack.getEngineBoard())) {
                     continue;
                 }
 
-                if (isSame(board2, callBack.getEngineBoard())) {
-                    continue;
-                }
-
-                Action action = compareBoard(board2, callBack.getEngineBoard(), isReverse, callBack.isWatchMode());
-                if (prop.isLinkAnimation() && needConfirm(board2, callBack.getEngineBoard(), action)) {
+                Action action = compareBoard(boardToCompare, callBack.getEngineBoard(), isReverse, callBack.isWatchMode());
+                if (prop.isLinkAnimation() && needConfirm(boardToCompare, callBack.getEngineBoard(), action)) {
                     boolean f = false;
                     do {
                         char[][] tmp = board1;
@@ -135,18 +146,20 @@ public abstract class AbstractGraphLinker implements GraphLinker, Runnable {
                             break;
                         }
 
-                        try {
-                            isReverse = reverse(board2);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            f = true;
-                            break;
-                        }
+                        // KHÔNG cần tính isReverse ở đây
+                        
                     } while (!isSame(board1, board2));
 
                     if (f) continue;
+                    
+                    // [MODIFIED] Cần áp dụng applyReverse lại cho board2 trước khi so sánh lần cuối
+                    if (isReverse) {
+                        boardToCompare = applyReverse(board2);
+                    } else {
+                        boardToCompare = board2;
+                    }
 
-                    action = compareBoard(board2, callBack.getEngineBoard(), isReverse, callBack.isWatchMode());
+                    action = compareBoard(boardToCompare, callBack.getEngineBoard(), isReverse, callBack.isWatchMode());
                 }
 
                 if (action != null) {
@@ -182,6 +195,27 @@ public abstract class AbstractGraphLinker implements GraphLinker, Runnable {
             }
         }
     }
+
+    // [MODIFIED] Utility function to apply the reverse transformation to a board
+    private char[][] applyReverse(char[][] rawBoard) {
+        char[][] flipped = new char[10][9];
+        // Deep copy
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 9; j++) {
+                flipped[i][j] = rawBoard[i][j];
+            }
+        }
+        // Apply flip transformation
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                char tmp = flipped[i][j];
+                flipped[i][j] = flipped[9 - i][8 - j];
+                flipped[9 - i][8 - j] = tmp;
+            }
+        }
+        return flipped;
+    }
+
 
     class Action {
         int flag;
@@ -300,9 +334,9 @@ public abstract class AbstractGraphLinker implements GraphLinker, Runnable {
     /**
      * 对比棋盘，计算出当前操作
      * flag： 1对方已走棋，需要同步到引擎
-     *      2引擎已走棋，需要同步到目标平台
-     *      3识别到新棋局
-     *      4可能识别到新棋局
+     * 2引擎已走棋，需要同步到目标平台
+     * 3识别到新棋局
+     * 4可能识别到新棋局
      * @param linkBoard
      * @param engineBoard
      * @param robotBlack
@@ -565,6 +599,11 @@ public abstract class AbstractGraphLinker implements GraphLinker, Runnable {
         fenCode = ChessBoard.fenCode(board2, redGo);
         // 回调，初始化棋盘
         callBack.linkerInitChessBoard(fenCode, isReverse);
+        
+        // [MODIFIED] Set count to a short cooldown value (5 cycles) after init,
+        // preventing immediate scan race condition.
+        this.count = 5; 
+
         return true;
     }
 
