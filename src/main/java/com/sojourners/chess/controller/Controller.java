@@ -1332,17 +1332,23 @@ public class Controller implements EngineCallBack, LinkerCallBack {
      */
     @Override
     public void linkerInitChessBoard(String fenCode, boolean isReverseDetected) {
-        // Phase 1: Setup the board model and visual state
+        // [MODIFIED] AGGRESSIVE SYNCHRONIZATION
+        // 1. Pause Linker (on background thread)
+        graphLinker.pause(); 
+
         Platform.runLater(() -> {
-            // 1. Tạo bàn cờ mới (Lưu ý: newChessBoard sẽ reset isReverse về false)
+            // 2. UI Thread: Update state
             newChessBoard(fenCode);
 
-            // 2. Cập nhật biến isReverse và ép bàn cờ theo đúng trạng thái Linker tìm thấy
+            // Cập nhật biến isReverse và ép bàn cờ theo đúng trạng thái Linker tìm thấy
             isReverse.setValue(isReverseDetected);
             board.reverse(isReverseDetected);
 
-            // 3. Khởi động lại chế độ (Auto/Watch)
+            // 3. Initiate Link Mode
             setLinkMode(linkComboBox.getValue());
+
+            // 4. UI Thread: Resume Linker ONLY AFTER state is fully set on UI
+            graphLinker.resume();
         });
     }
 
