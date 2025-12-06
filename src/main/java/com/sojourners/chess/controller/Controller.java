@@ -418,7 +418,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
             // Nếu tạo được nước đi hợp lệ
             if (move != null) {
-                // [MODIFIED] Nếu đang ở chế độ liên kết (Link Mode - bao gồm Quan chiến), 
+                // Nếu đang ở chế độ liên kết (Link Mode - bao gồm Quan chiến), 
                 // gửi tín hiệu click ra bàn cờ bên ngoài
                 if (linkMode.getValue()) {
                     ChessBoard.Step step = board.stepForBoard(move);
@@ -1312,15 +1312,20 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     /**
      * 图形连线初始化棋盘
      * @param fenCode
-     * @param isReverse
+     * @param isReverseDetected
      */
     @Override
-    public void linkerInitChessBoard(String fenCode, boolean isReverse) {
+    public void linkerInitChessBoard(String fenCode, boolean isReverseDetected) {
         Platform.runLater(() -> {
+            // 1. Tạo bàn cờ mới (Lưu ý: newChessBoard sẽ reset isReverse về false)
             newChessBoard(fenCode);
-            if (isReverse) {
-                reverseButtonClick(null);
-            }
+
+            // 2. [MODIFIED] Cập nhật biến isReverse và ép bàn cờ theo đúng trạng thái Linker tìm thấy
+            // Thay vì dùng nút bấm (toggle), ta set trực tiếp giá trị để đảm bảo chính xác
+            isReverse.setValue(isReverseDetected);
+            board.reverse(isReverseDetected);
+
+            // 3. Khởi động lại chế độ (Auto/Watch)
             setLinkMode(linkComboBox.getValue());
         });
     }
@@ -1367,8 +1372,10 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         String fenCode = board.fenCode(f ? !redGo : redGo);
         newChessBoard(fenCode);
 
+        // [MODIFIED] Giữ nguyên trạng thái đảo chiều khi switch player để tránh bị xoay bàn cờ không mong muốn
         isReverse.setValue(tmpReverse);
         board.reverse(tmpReverse);
+        
         robotRed.setValue(tmpRed);
         robotBlack.setValue(tmpBlack);
         robotAnalysis.setValue(tmpAnalysis);
