@@ -788,7 +788,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         // canvas drag listener
         initCanvasDragListener();
         
-        // [ADDED] Fix lỗi chớp chuột: Vô hiệu hóa event di chuyển chuột gây redraw.
+        // [ADDED] Fix flickering: Vô hiệu hóa event di chuyển chuột gây redraw.
         fixMouseFlicker();
 
         useOpenBook.setValue(prop.getBookSwitch());
@@ -804,10 +804,9 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     // [ADDED] Phương thức mới để khắc phục lỗi chớp chớp chuột
     private void fixMouseFlicker() {
         // Fix flickering by preventing redrawing on every mouse move event.
-        // Bất kỳ đoạn code nào trong ChessBoard.java lắng nghe sự kiện này sẽ bị ngăn chặn
-        // do chúng ta ghi đè bằng một hàm không làm gì cả.
+        // Điều này ngăn chặn việc gọi các hàm vẽ lại canvas trong ChessBoard
         this.canvas.setOnMouseMoved(event -> {
-            event.consume();
+            event.consume(); 
         });
     }
 
