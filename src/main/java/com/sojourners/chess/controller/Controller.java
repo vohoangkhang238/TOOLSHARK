@@ -1377,26 +1377,31 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     private void switchPlayer(boolean f) {
         engineStop();
 
-        // [MODIFIED] Bỏ pause/resume và bảo lưu trạng thái đảo chiều.
-        // Bằng cách này, logic Linker có thể ngay lập tức thiết lập lại trạng thái 
-        // chính xác sau khi switchPlayer kết thúc.
-        // graphLinker.pause(); <-- REMOVED
-
-        boolean tmpRed = robotRed.getValue(), tmpBlack = robotBlack.getValue(), tmpAnalysis = robotAnalysis.getValue(), tmpLink = linkMode.getValue(), tmpReverse = isReverse.getValue();
+        // 1. Lưu trạng thái robot và Link Mode
+        boolean tmpRed = robotRed.getValue();
+        boolean tmpBlack = robotBlack.getValue();
+        boolean tmpAnalysis = robotAnalysis.getValue();
+        boolean tmpLink = linkMode.getValue();
+        boolean tmpReverse = isReverse.getValue(); // Giá trị isReverse trước khi switch
 
         String fenCode = board.fenCode(f ? !redGo : redGo);
-        newChessBoard(fenCode);
+        newChessBoard(fenCode); // <- HÀM NÀY SẼ RESET isReverse VỀ FALSE (không lật)
 
-        // [MODIFIED] Giữ nguyên trạng thái đảo chiều khi switch player để tránh bị xoay bàn cờ không mong muốn
-        isReverse.setValue(tmpReverse);
-        board.reverse(tmpReverse);
-        
+        // 2. [MODIFIED] Khôi phục isReverse chỉ khi KHÔNG ở Link Mode
+        if (!tmpLink) {
+            // Nếu KHÔNG ở Link Mode, ta khôi phục lại trạng thái lật bàn cờ
+            // để chỉ đổi bên đi, không đổi mặt bàn cờ (trừ khi người dùng nhấn nút lật)
+            isReverse.setValue(tmpReverse);
+            board.reverse(tmpReverse);
+        }
+        // Nếu ở Link Mode, ta KHÔNG khôi phục isReverse. 
+        // Logic Linker sẽ tự quét và gọi linkerInitChessBoard để đồng bộ trạng thái lật mới từ web.
+
+        // 3. Khôi phục trạng thái robot và Link Mode
         robotRed.setValue(tmpRed);
         robotBlack.setValue(tmpBlack);
         robotAnalysis.setValue(tmpAnalysis);
         linkMode.setValue(tmpLink);
-
-        // graphLinker.resume(); <-- REMOVED
 
         if (robotRed.getValue() && redGo || robotBlack.getValue() && !redGo || robotAnalysis.getValue()) {
             engineGo();
