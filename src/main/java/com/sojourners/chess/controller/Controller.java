@@ -1377,7 +1377,10 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     private void switchPlayer(boolean f) {
         engineStop();
 
-        graphLinker.pause();
+        // [MODIFIED] Bỏ pause/resume và bảo lưu trạng thái đảo chiều.
+        // Bằng cách này, logic Linker có thể ngay lập tức thiết lập lại trạng thái 
+        // chính xác sau khi switchPlayer kết thúc.
+        // graphLinker.pause(); <-- REMOVED
 
         boolean tmpRed = robotRed.getValue(), tmpBlack = robotBlack.getValue(), tmpAnalysis = robotAnalysis.getValue(), tmpLink = linkMode.getValue(), tmpReverse = isReverse.getValue();
 
@@ -1393,7 +1396,8 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         robotAnalysis.setValue(tmpAnalysis);
         linkMode.setValue(tmpLink);
 
-        graphLinker.resume();
+        // graphLinker.resume(); <-- REMOVED
+
         if (robotRed.getValue() && redGo || robotBlack.getValue() && !redGo || robotAnalysis.getValue()) {
             engineGo();
         }
