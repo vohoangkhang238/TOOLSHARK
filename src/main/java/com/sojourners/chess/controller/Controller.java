@@ -1125,6 +1125,10 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
     private void setLinkMode(String t1) {
         if (linkMode.getValue()) {
+            // [MODIFIED] Bắt buộc vẽ lại bàn cờ theo trạng thái isReverse hiện tại 
+            // mỗi khi chế độ liên kết được kích hoạt/thiết lập, để đảm bảo đồng bộ hóa
+            board.reverse(isReverse.getValue());
+            
             if ("自动走棋".equals(t1)) {
                 // 观战模式切换自动走棋，先停止引擎
                 engineStop();
@@ -1328,17 +1332,20 @@ public class Controller implements EngineCallBack, LinkerCallBack {
      */
     @Override
     public void linkerInitChessBoard(String fenCode, boolean isReverseDetected) {
+        // Phase 1: Setup the board model and visual state
         Platform.runLater(() -> {
             // 1. Tạo bàn cờ mới (Lưu ý: newChessBoard sẽ reset isReverse về false)
             newChessBoard(fenCode);
 
-            // 2. [MODIFIED] Cập nhật biến isReverse và ép bàn cờ theo đúng trạng thái Linker tìm thấy
-            // Thay vì dùng nút bấm (toggle), ta set trực tiếp giá trị để đảm bảo chính xác
+            // 2. Cập nhật biến isReverse và ép bàn cờ theo đúng trạng thái Linker tìm thấy
             isReverse.setValue(isReverseDetected);
             board.reverse(isReverseDetected);
 
-            // 3. Khởi động lại chế độ (Auto/Watch)
-            setLinkMode(linkComboBox.getValue());
+            // Phase 2: Defer Link Mode setup to ensure UI redraw is complete before starting Link Mode logic
+            Platform.runLater(() -> {
+                // Khởi động lại chế độ (Auto/Watch)
+                setLinkMode(linkComboBox.getValue());
+            });
         });
     }
 
