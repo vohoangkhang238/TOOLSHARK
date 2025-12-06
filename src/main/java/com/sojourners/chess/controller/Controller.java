@@ -1372,7 +1372,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         return "观战模式".equals(linkComboBox.getValue());
     }
 
-    // [MODIFIED] Phương thức isReverse() mới được thêm vào LinkerCallBack
+    // [FIXED] Thực thi phương thức isReverse() từ LinkerCallBack
     @Override
     public boolean isReverse() {
         return this.isReverse.getValue();
