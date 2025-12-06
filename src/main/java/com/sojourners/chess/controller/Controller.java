@@ -398,7 +398,9 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
         engine.setThreadNum(prop.getThreadNum());
         engine.setHashSize(prop.getHashSize());
-        engine.setAnalysisModel(robotAnalysis.getValue() ? Engine.AnalysisModel.INFINITE : prop.getAnalysisModel(), prop.getAnalysisValue());
+        // [MODIFIED] Bỏ ép về INFINITE khi ở chế độ Analysis/Spectator, 
+        // để engine luôn tuân thủ cài đặt thời gian/độ sâu mặc định của người dùng (tư duy giới hạn).
+        engine.setAnalysisModel(prop.getAnalysisModel(), prop.getAnalysisValue());
         engine.analysis(fenCode, moveList.subList(0, p), this.board.getBoard(), redGo);
     }
 
@@ -675,8 +677,18 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
     @FXML
     public void reverseButtonClick(ActionEvent event) {
+        // [MODIFIED] Tạm dừng Linker nếu đang chạy để tránh xung đột cập nhật
+        if (linkMode.getValue()) {
+            graphLinker.pause();
+        }
+
         isReverse.setValue(!isReverse.getValue());
         board.reverse(isReverse.getValue());
+
+        // [MODIFIED] Khôi phục lại Linker với trạng thái isReverse mới
+        if (linkMode.getValue()) {
+            graphLinker.resume();
+        }
     }
 
     @FXML
