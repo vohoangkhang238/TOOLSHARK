@@ -29,7 +29,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-// [FIX] Import rõ ràng các class JavaFX
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -55,7 +54,6 @@ import javafx.stage.FileChooser;
 import javafx.util.Callback;
 
 import javax.imageio.ImageIO;
-// [FIX] Chỉ import những class AWT cần thiết
 import java.awt.Desktop; 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
@@ -410,9 +408,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         // Chuột trái: chọn & đi quân trên TCHESS
         if (event.getButton() == MouseButton.PRIMARY) {
 
-            // [MODIFIED] LUÔN cho phép cả đỏ lẫn đen được chọn / đi (cả trong 观战模式)
-            // Việc thiết lập (true, true) cho phép người dùng điều khiển quân cờ trực tiếp
-            // ngay cả khi engine hoặc linker đang chạy.
+            // LUÔN cho phép cả đỏ lẫn đen được chọn / đi (cả trong 观战模式)
             String move = board.mouseClick(
                     (int) event.getX(),
                     (int) event.getY(),
@@ -420,15 +416,22 @@ public class Controller implements EngineCallBack, LinkerCallBack {
                     true   // always allow black pieces
             );
 
-            // Nếu tạo được nước đi hợp lệ thì cập nhật lại trạng thái ván cờ
+            // Nếu tạo được nước đi hợp lệ
             if (move != null) {
+                // [MODIFIED] Nếu đang ở chế độ liên kết (Link Mode - bao gồm Quan chiến), 
+                // gửi tín hiệu click ra bàn cờ bên ngoài
+                if (linkMode.getValue()) {
+                    ChessBoard.Step step = board.stepForBoard(move);
+                    trickAutoClick(step);
+                }
+
                 goCallBack(move);
             }
 
             // Ẩn menu chuột phải (nếu đang mở)
             BoardContextMenu.getInstance().hide();
 
-            // Chuột phải: hiện menu context (copy/paste FEN, đổi bên đi, v.v.)
+        // Chuột phải: hiện menu context (copy/paste FEN, đổi bên đi, v.v.)
         } else if (event.getButton() == MouseButton.SECONDARY) {
             BoardContextMenu.getInstance().show(
                     this.canvas,
@@ -1194,7 +1197,8 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         if (step != null) {
             int x1 = step.getFirst().getX(), y1 = step.getFirst().getY();
             int x2 = step.getSecond().getX(), y2 = step.getSecond().getY();
-            if (robotBlack.getValue()) {
+            // [MODIFIED] Check isReverse too because robotBlack is false in Spectator mode
+            if (robotBlack.getValue() || isReverse.getValue()) {
                 y1 = 9 - y1;
                 y2 = 9 - y2;
                 x1 = 8 - x1;
