@@ -1341,11 +1341,8 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             isReverse.setValue(isReverseDetected);
             board.reverse(isReverseDetected);
 
-            // Phase 2: Defer Link Mode setup to ensure UI redraw is complete before starting Link Mode logic
-            Platform.runLater(() -> {
-                // Khởi động lại chế độ (Auto/Watch)
-                setLinkMode(linkComboBox.getValue());
-            });
+            // 3. Khởi động lại chế độ (Auto/Watch)
+            setLinkMode(linkComboBox.getValue());
         });
     }
 
