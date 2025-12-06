@@ -789,7 +789,9 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         initCanvasDragListener();
         
         // [ADDED] Fix flickering: Vô hiệu hóa event di chuyển chuột gây redraw.
-        fixMouseFlicker();
+        this.canvas.setOnMouseMoved(event -> {
+            event.consume(); 
+        });
 
         useOpenBook.setValue(prop.getBookSwitch());
 
@@ -798,15 +800,6 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             if (splitPane != null) {
                 splitPane.setDividerPositions(1.0);
             }
-        });
-    }
-
-    // [ADDED] Phương thức mới để khắc phục lỗi chớp chớp chuột
-    private void fixMouseFlicker() {
-        // Fix flickering by preventing redrawing on every mouse move event.
-        // Điều này ngăn chặn việc gọi các hàm vẽ lại canvas trong ChessBoard
-        this.canvas.setOnMouseMoved(event -> {
-            event.consume(); 
         });
     }
 
