@@ -33,41 +33,42 @@
           </Menu>
 
           <Menu mnemonicParsing="false" text="局面" visible="false">
-             <items>
-                <MenuItem mnemonicParsing="false" onAction="#newButtonClick" text="新局面" />
-                <MenuItem mnemonicParsing="false" onAction="#editChessBoardClick" text="编辑局面" />
-                <MenuItem mnemonicParsing="false" onAction="#copyButtonClick" text="复制局面FEN" />
-                <MenuItem mnemonicParsing="false" onAction="#pasteButtonClick" text="粘贴局面FEN" />
-                <MenuItem mnemonicParsing="false" onAction="#copyImageMenuClick" text="复制局面图片" />
-                <MenuItem mnemonicParsing="false" onAction="#pasteImageMenuClick" text="粘贴局面图片" />
-                <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="图片导入局面" />
-                <MenuItem mnemonicParsing="false" onAction="#exportImageMenuClick" text="局面导出图片" />
-             </items>
-          </Menu>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#newButtonClick" text="新局面" />
+                  <MenuItem mnemonicParsing="false" onAction="#editChessBoardClick" text="编辑局面" />
+                  <MenuItem mnemonicParsing="false" onAction="#copyButtonClick" text="复制局面FEN" />
+                  <MenuItem mnemonicParsing="false" onAction="#pasteButtonClick" text="粘贴局面FEN" />
+                  <MenuItem mnemonicParsing="false" onAction="#copyImageMenuClick" text="复制局面图片" />
+                  <MenuItem mnemonicParsing="false" onAction="#pasteImageMenuClick" text="粘贴局面图片" />
+                  <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="图片导入局面" />
+                  <MenuItem mnemonicParsing="false" onAction="#exportImageMenuClick" text="局面导出图片" />
+               </items>
+            </Menu>
 
-          <Menu mnemonicParsing="false" text="开局库" visible="false">
-             <items>
-                <MenuItem mnemonicParsing="false" onAction="#bookSettingButtonClick" text="库招设置" />
-                <MenuItem mnemonicParsing="false" onAction="#localBookManageButtonClick" text="本地库管理" />
-             </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="开局库" visible="false">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#bookSettingButtonClick" text="库招设置" />
+                  <MenuItem mnemonicParsing="false" onAction="#localBookManageButtonClick" text="本地库管理" />
+               </items>
+            </Menu>
 
-          <Menu mnemonicParsing="false" text="引擎" visible="false">
-             <items>
-                <MenuItem mnemonicParsing="false" onAction="#engineManageClick" text="引擎管理" />
-                <MenuItem mnemonicParsing="false" onAction="#timeSettingButtonClick" text="时间设置" />
-             </items>
-          </Menu>
+            <Menu mnemonicParsing="false" text="引擎" visible="false">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#engineManageClick" text="引擎管理" />
+                  <MenuItem mnemonicParsing="false" onAction="#timeSettingButtonClick" text="时间设置" />
+               </items>
+            </Menu>
 
-          <Menu mnemonicParsing="false" text="连线">
-             <items>
-                <MenuItem mnemonicParsing="false" onAction="#linkSettingClick" text="连线参数" />
-                <CheckMenuItem fx:id="menuOfLinkBackMode" mnemonicParsing="false" onAction="#linkBackModeChecked" text="后台连线" />
-                <CheckMenuItem fx:id="menuOfLinkAnimation" mnemonicParsing="false" onAction="#linkAnimationChecked" text="开启动画确认" />
-             </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="设置">
-            <items>
+            <Menu mnemonicParsing="false" text="连线" visible="false">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#linkSettingClick" text="连线参数" />
+                  <CheckMenuItem fx:id="menuOfLinkBackMode" mnemonicParsing="false" onAction="#linkBackModeChecked" text="后台连线" />
+                  <CheckMenuItem fx:id="menuOfLinkAnimation" mnemonicParsing="false" onAction="#linkAnimationChecked" text="开启动画确认" />
+               </items>
+            </Menu>
+
+            <Menu mnemonicParsing="false" text="设置" visible="false">
+                <items>
                   <CheckMenuItem fx:id="menuOfStepTip" mnemonicParsing="false" onAction="#stepTipChecked" text="棋步提示" />
                   <CheckMenuItem fx:id="menuOfStepSound" mnemonicParsing="false" onAction="#stepSoundClick" text="走棋音效" />
                   <CheckMenuItem fx:id="menuOfShowNumber" mnemonicParsing="false" onAction="#showNumberClick" text="显示线路" />
@@ -96,14 +97,15 @@
                         <RadioMenuItem fx:id="menuOfAutoFitBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="自适应" toggleGroup="$boardStyle" />
                     </items>
                   </Menu>
-             </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="帮助">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#homeClick" text="主页" />
+                </items>
+            </Menu>
+
+            <Menu mnemonicParsing="false" text="帮助">
+                <items>
+                  <MenuItem mnemonicParsing="false" onAction="#homeClick" text="主页" />
                   <MenuItem mnemonicParsing="false" onAction="#aboutClick" text="关于" />
-            </items>
-          </Menu>
+                </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>
@@ -177,7 +179,7 @@
             <SplitPane fx:id="splitPane" dividerPositions="0.6416122004357299" stylesheets="@../style/split-pane.css" BorderPane.alignment="CENTER">
               <items>
                 <AnchorPane fx:id="canvasPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
-                     <children>
+                   <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
                               <Canvas fx:id="canvas" height="650.0" onMouseClicked="#canvasClick" width="586.0" BorderPane.alignment="CENTER" />
@@ -195,80 +197,80 @@
                      <children>
                         <SplitPane fx:id="splitPane2" dividerPositions="0.6461538461538462" layoutX="32.0" layoutY="111.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <items>
-                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
+                             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
                                  <children>
                                     <BorderPane fx:id="listViewPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <center>
+                                      <center>
                                           <ListView fx:id="listView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" stylesheets="@../style/app.css" BorderPane.alignment="CENTER" />
-                                       </center>
+                                      </center>
                                        <top>
-                                          <ToolBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" BorderPane.alignment="CENTER">
+                                           <ToolBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" BorderPane.alignment="CENTER">
                                              <items>
                                                 <Label text="引擎" />
                                                 <ComboBox fx:id="engineComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="95.0" stylesheets="@../style/combobox.css" />
                                                 <ComboBox fx:id="threadComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="60.0" stylesheets="@../style/combobox.css" />
                                                 <ComboBox fx:id="hashComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="65.0" stylesheets="@../style/combobox.css" />
-                                                <Label text="MB" />
+                                                 <Label text="MB" />
                                              </items>
-                                          </ToolBar>
+                                           </ToolBar>
                                        </top>
                                     </BorderPane>
-                                 </children></AnchorPane>
+                                  </children></AnchorPane>
                             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
                                  <children>
-                                    <TabPane side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                     <TabPane side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <tabs>
-                                        <Tab text="棋谱">
+                                         <Tab text="棋谱">
                                              <content>
-                                                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                                 <BorderPane prefHeight="200.0" prefWidth="200.0">
                                                    <center>
-                                                      <TableView fx:id="recordTable" onMouseClicked="#recordTableClick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 100%;" stylesheets="@../style/table.css" BorderPane.alignment="CENTER">
+                                                       <TableView fx:id="recordTable" onMouseClicked="#recordTableClick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 100%;" stylesheets="@../style/table.css" BorderPane.alignment="CENTER">
                                                         <columns>
-                                                          <TableColumn editable="false" prefWidth="60.0" sortable="false" text="序号" />
+                                                           <TableColumn editable="false" prefWidth="60.0" sortable="false" text="序号" />
                                                           <TableColumn editable="false" prefWidth="120.0" sortable="false" text="着法" />
-                                                            <TableColumn editable="false" prefWidth="90.0" sortable="false" text="分数" />
-                                                        </columns>
+                                                             <TableColumn editable="false" prefWidth="90.0" sortable="false" text="分数" />
+                                                         </columns>
                                                       </TableView>
                                                    </center>
                                                    <bottom>
-                                                      <ToolBar minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="28.0" prefWidth="200.0" style="-fx-background-insets: 28px;" BorderPane.alignment="CENTER">
+                                                       <ToolBar minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="28.0" prefWidth="200.0" style="-fx-background-insets: 28px;" BorderPane.alignment="CENTER">
                                                         <items>
-                                                          <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#finalButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-left.png');" stylesheets="@../style/app.css" text="Button" />
+                                                           <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#finalButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-left.png');" stylesheets="@../style/app.css" text="Button" />
                                                             <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#forwardButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-left.png');" stylesheets="@../style/app.css" text="Button" />
                                                             <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-right.png');" stylesheets="@../style/app.css" text="Button" />
                                                             <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#frontButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-right.png');" stylesheets="@../style/app.css" text="Button" />
                                                         </items>
-                                                      </ToolBar>
+                                                       </ToolBar>
                                                    </bottom>
-                                                </BorderPane>
+                                                 </BorderPane>
                                              </content>
                                         </Tab>
-                                        <Tab text="局势图">
+                                         <Tab text="局势图">
                                              <content>
-                                                <BorderPane fx:id="charPane" prefHeight="200.0" prefWidth="200.0" />
+                                                 <BorderPane fx:id="charPane" prefHeight="200.0" prefWidth="200.0" />
                                              </content>
-                                        </Tab>
+                                         </Tab>
                                         <Tab text="库招">
-                                             <content>
+                                              <content>
                                                 <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                                   <center>
+                                                    <center>
                                                       <TableView fx:id="bookTable" onMouseClicked="#bookTableClick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 100%;" stylesheets="@../style/table.css" BorderPane.alignment="CENTER">
                                                         <columns>
-                                                          <TableColumn editable="false" prefWidth="75.0" sortable="false" text="招法" />
+                                                           <TableColumn editable="false" prefWidth="75.0" sortable="false" text="招法" />
                                                           <TableColumn editable="false" prefWidth="64.0" sortable="false" text="分数" />
-                                                            <TableColumn editable="false" prefWidth="64.0" sortable="false" text="胜率" />
-                                                            <TableColumn editable="false" prefWidth="60.0" sortable="false" text="胜" />
+                                                             <TableColumn editable="false" prefWidth="64.0" sortable="false" text="胜率" />
+                                                             <TableColumn editable="false" prefWidth="60.0" sortable="false" text="胜" />
                                                             <TableColumn editable="false" prefWidth="60.0" sortable="false" text="和" />
-                                                            <TableColumn editable="false" prefWidth="60.0" sortable="false" text="负" />
-                                                            <TableColumn editable="false" prefWidth="75.0" sortable="false" text="备注" />
+                                                             <TableColumn editable="false" prefWidth="60.0" sortable="false" text="负" />
+                                                             <TableColumn editable="false" prefWidth="75.0" sortable="false" text="备注" />
                                                             <TableColumn editable="false" sortable="false" text="来源" />
-                                                        </columns>
+                                                         </columns>
                                                       </TableView>
-                                                   </center>
+                                                  </center>
                                                 </BorderPane>
-                                             </content></Tab>
+                                              </content></Tab>
                                       </tabs>
-                                    </TabPane>
+                                     </TabPane>
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
