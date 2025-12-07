@@ -131,12 +131,14 @@
                      </opaqueInsets>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                  <Button fx:id="backButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#regretButtonClick" style="-fx-background-image: url('/image/back.png');" stylesheets="@../style/app.css" text="Button">
+                  
+                  <Button fx:id="backButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#regretButtonClick" style="-fx-background-image: url('/image/back.png');" stylesheets="@../style/app.css" text="Button" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="reverseButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reverseButtonClick" style="-fx-background-image: url('/image/reverse.png');" stylesheets="@../style/app.css" text="Button">
+                  
+                  <Button fx:id="reverseButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reverseButtonClick" style="-fx-background-image: url('/image/reverse.png');" stylesheets="@../style/app.css" text="Button" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -157,7 +159,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="immediateButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#immediateButtonClick" style="-fx-background-image: url('/image/goim.png');" stylesheets="@../style/app.css" text="Button">
+                  <Button fx:id="immediateButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#immediateButtonClick" style="-fx-background-image: url('/image/goim.png');" stylesheets="@../style/app.css" text="Button" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -199,7 +201,7 @@
                      <children>
                         <SplitPane fx:id="splitPane2" dividerPositions="0.6461538461538462" layoutX="32.0" layoutY="111.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <items>
-                             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
+                             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" visible="false">
                                  <children>
                                     <BorderPane fx:id="listViewPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <center>
@@ -218,7 +220,7 @@
                                        </top>
                                     </BorderPane>
                                   </children></AnchorPane>
-                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
+                            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" visible="false">
                                  <children>
                                      <TabPane side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <tabs>
