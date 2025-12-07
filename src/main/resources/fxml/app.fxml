@@ -119,7 +119,16 @@
                 <Button fx:id="newButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newButtonClick" style="-fx-background-image: url('/image/file-plus.png');" stylesheets="@../style/app.css" text="Tạo mới">
                      <opaqueInsets>
                         <Insets />
-                     </opaqueInsets></Button>
+                     </opaqueInsets>
+                </Button>
+                
+                <ComboBox fx:id="linkComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="89.0" stylesheets="@../style/combobox.css" />
+                <Button fx:id="linkButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#linkButtonClick" style="-fx-background-image: url('/image/link.png');" stylesheets="@../style/app.css" text="Kết nối">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                </Button>
+                  
                   <Button fx:id="copyButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyButtonClick" style="-fx-background-image: url('/image/copy.png');" stylesheets="@../style/app.css" text="Sao chép" visible="false">
                      <opaqueInsets>
                         <Insets />
@@ -170,12 +179,6 @@
                      </opaqueInsets>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                  <ComboBox fx:id="linkComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="89.0" stylesheets="@../style/combobox.css" />
-                  <Button fx:id="linkButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#linkButtonClick" style="-fx-background-image: url('/image/link.png');" stylesheets="@../style/app.css" text="Kết nối">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
               </items>
             </ToolBar>
          </top>
