@@ -1,63 +1,86 @@
 /* File: src/main/resources/style/full-theme.css */
 
-/* 1. Global (Áp dụng cho toàn bộ cửa sổ) */
+/* --- 1. GLOBALS & WINDOW BACKGROUND (Nền tối công nghệ) --- */
 .root {
-    -fx-background-color: #2c3e50; /* Nền xanh xám đậm */
-    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #0d1117; /* Very dark background */
+    -fx-font-family: 'Consolas', 'Courier New', monospace; /* Phông chữ công nghệ */
     -fx-font-size: 13px;
-    -fx-text-fill: #ecf0f1;
+    -fx-text-fill: #9be9a8; /* Mặc định chữ xanh nhạt */
 }
 
-/* 2. Thanh Menu Bar (Kết nối, Cài đặt) */
+/* --- 2. MENU BAR & TOOL BAR (Thanh công cụ) --- */
 .menu-bar {
-    -fx-background-color: #1a242f; /* Nền tối hơn */
-    -fx-border-color: #3e4f60;
-    -fx-border-width: 0 0 1 0;
+    -fx-background-color: #1a232f; /* Dark header base */
+    -fx-border-color: #00bcd4; /* Light Blue/Cyan border */
+    -fx-border-width: 0 0 1px 0;
 }
 
-/* Đảm bảo chữ trong Menu sáng màu */
 .menu-item .label, .menu .label {
-    -fx-text-fill: #ecf0f1; 
+    -fx-text-fill: #00bcd4; /* Chữ menu màu Cyan */
 }
 
-/* 3. Thanh Tool Bar (Chứa nút Tự động/Xem cờ) */
+/* Tool Bar Styling (Chứa RadioButton) */
 .tool-bar {
-    -fx-background-color: #34495e; /* Màu xám xanh giữa */
-    -fx-spacing: 10;
-    -fx-padding: 3 8 3 8;
+    -fx-background-color: #1a232f;
+    -fx-spacing: 12;
+    -fx-padding: 5 10 5 10;
 }
 
-/* 4. Radio Buttons (Tự động/Xem cờ) */
+/* --- 3. BUTTONS & NEON GLOW EFFECTS (Nút bấm, Radio) --- */
+
+/* Nút biểu tượng (Tạo mới, Kết nối) */
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #00bcd4;
+    -fx-border-color: #00bcd4;
+    -fx-border-width: 1px;
+    -fx-border-radius: 4;
+    -fx-padding: 3 6;
+    -fx-cursor: hand;
+    /* Hiệu ứng Neon Glow */
+    -fx-effect: dropshadow(three-pass-box, #00bcd4, 15, 0.5, 0, 0);
+}
+
+.button:hover {
+    -fx-background-color: rgba(0, 188, 212, 0.2);
+    -fx-effect: dropshadow(three-pass-box, #00bcd4, 25, 0.7, 0, 0);
+}
+
+/* Radio Buttons (Tự Động Chơi / Xem Cờ) */
 .radio-button {
-    -fx-text-fill: #ecf0f1; /* Chữ trắng */
+    -fx-text-fill: #00bcd4;
     -fx-padding: 4 0;
+    -fx-effect: dropshadow(three-pass-box, #00bcd4, 5, 0.2, 0, 0); /* Ánh sáng nhẹ */
 }
 
 .radio-button .radio {
-    -fx-background-color: #ecf0f1; /* Nền vòng tròn trắng */
-    -fx-border-color: #3498db; /* Viền xanh */
+    -fx-background-color: #1a232f;
+    -fx-border-color: #00bcd4;
     -fx-border-radius: 100;
     -fx-border-width: 1.5;
 }
 
 .radio-button:selected .dot {
-    -fx-background-color: #3498db; /* Chấm tròn màu xanh */
+    -fx-background-color: #ff3864; /* Chấm tròn màu Đỏ Neon */
+    -fx-effect: dropshadow(three-pass-box, #ff3864, 10, 0.8, 0, 0); /* Ánh sáng đỏ mạnh */
 }
 
-/* 5. Nút biểu tượng (Tạo mới, Kết nối) */
-.button {
-    -fx-background-color: transparent; /* Nền trong suốt */
-    -fx-padding: 3 6;
-    -fx-cursor: hand;
-}
-
-.button:hover {
-    -fx-background-color: #557291; /* Hiệu ứng hover nhẹ */
-}
-
-/* 6. Thanh trạng thái (Status Bar) */
+/* --- 4. STATUS BAR (Thanh trạng thái dưới cùng) --- */
 .status-tool-bar {
-    -fx-background-color: #2c3e50; 
-    -fx-border-color: #3e4f60;
-    -fx-border-width: 1 0 0 0;
+    -fx-background-color: #1a232f;
+    -fx-border-color: #00bcd4;
+    -fx-border-width: 1px 0 0 0;
+    -fx-padding: 2 10 2 10;
+}
+
+/* Label trong thanh trạng thái */
+.status-tool-bar .label {
+    -fx-text-fill: #9be9a8;
+}
+
+/* --- 5. BÀN CỜ (Canvas) --- */
+/* Lưu ý: Màu bàn cờ (quân cờ/đường kẻ) được vẽ trực tiếp trong ChessBoard.java. 
+   CSS này chỉ định màu nền của container. */
+.canvas-pane {
+    -fx-background-color: #0d1117; 
 }
