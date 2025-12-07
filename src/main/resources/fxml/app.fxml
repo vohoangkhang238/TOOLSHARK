@@ -59,7 +59,7 @@
                </items>
             </Menu>
 
-            <Menu mnemonicParsing="false" text="连线" visible="false">
+            <Menu mnemonicParsing="false" text="连线">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#linkSettingClick" text="连线参数" />
                   <CheckMenuItem fx:id="menuOfLinkBackMode" mnemonicParsing="false" onAction="#linkBackModeChecked" text="后台连线" />
@@ -67,8 +67,8 @@
                </items>
             </Menu>
 
-            <Menu mnemonicParsing="false" text="设置" visible="false">
-                <items>
+            <Menu mnemonicParsing="false" text="设置">
+               <items>
                   <CheckMenuItem fx:id="menuOfStepTip" mnemonicParsing="false" onAction="#stepTipChecked" text="棋步提示" />
                   <CheckMenuItem fx:id="menuOfStepSound" mnemonicParsing="false" onAction="#stepSoundClick" text="走棋音效" />
                   <CheckMenuItem fx:id="menuOfShowNumber" mnemonicParsing="false" onAction="#showNumberClick" text="显示线路" />
@@ -97,14 +97,14 @@
                         <RadioMenuItem fx:id="menuOfAutoFitBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="自适应" toggleGroup="$boardStyle" />
                     </items>
                   </Menu>
-                </items>
+               </items>
             </Menu>
 
-            <Menu mnemonicParsing="false" text="帮助">
-                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#homeClick" text="主页" />
-                  <MenuItem mnemonicParsing="false" onAction="#aboutClick" text="关于" />
-                </items>
+            <Menu mnemonicParsing="false" text="帮助" visible="false">
+               <items>
+                 <MenuItem mnemonicParsing="false" onAction="#homeClick" text="主页" />
+                 <MenuItem mnemonicParsing="false" onAction="#aboutClick" text="关于" />
+               </items>
             </Menu>
         </menus>
       </MenuBar>
