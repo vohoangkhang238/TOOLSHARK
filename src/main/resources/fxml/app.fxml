@@ -57,12 +57,12 @@
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#linkSettingClick" text="Thông số kết nối" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <RadioMenuItem fx:id="menuOfAutoMoveMode" mnemonicParsing="false" onAction="#linkModeSelected" text="Tự động đi (Auto Move)">
+                  <RadioMenuItem fx:id="menuOfAutoMoveMode" mnemonicParsing="false" onAction="#linkModeSelected" text="Tự động chơi">
                      <toggleGroup>
                         <ToggleGroup fx:id="linkModeGroup" />
                      </toggleGroup>
                   </RadioMenuItem>
-                  <RadioMenuItem fx:id="menuOfSpectatorMode" mnemonicParsing="false" onAction="#linkModeSelected" text="Chế độ xem (Spectator)" toggleGroup="$linkModeGroup" />
+                  <RadioMenuItem fx:id="menuOfSpectatorMode" mnemonicParsing="false" onAction="#linkModeSelected" text="Chế độ xem cờ" toggleGroup="$linkModeGroup" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <CheckMenuItem fx:id="menuOfLinkBackMode" mnemonicParsing="false" onAction="#linkBackModeChecked" text="Kết nối nền" />
                   <CheckMenuItem fx:id="menuOfLinkAnimation" mnemonicParsing="false" onAction="#linkAnimationChecked" text="Xác nhận Animation" />

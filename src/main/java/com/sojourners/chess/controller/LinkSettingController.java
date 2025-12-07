@@ -6,9 +6,7 @@ import com.sojourners.chess.util.DialogUtils;
 import com.sojourners.chess.util.StringUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-
 
 public class LinkSettingController {
 
@@ -35,43 +33,46 @@ public class LinkSettingController {
 
         String txt = linkScanTime.getText();
         if (!StringUtils.isPositiveInt(txt)) {
-            DialogUtils.showErrorDialog("失败", "输入扫描时间错误");
+            DialogUtils.showErrorDialog("Lỗi", "Thời gian quét phải là số dương!");
             return;
         }
         prop.setLinkScanTime(Long.parseLong(txt));
+        
         txt = linkThreadNum.getText();
         if (!StringUtils.isPositiveInt(txt)) {
-            DialogUtils.showErrorDialog("失败", "输入扫描扫描线程数量错误");
+            DialogUtils.showErrorDialog("Lỗi", "Số luồng quét phải là số dương!");
             return;
         }
         prop.setLinkThreadNum(Integer.parseInt(txt));
 
         txt = mouseClickDelay.getText();
         if (!StringUtils.isNonNegativeInt(txt)) {
-            DialogUtils.showErrorDialog("失败", "输入鼠标点击延迟错误");
+            DialogUtils.showErrorDialog("Lỗi", "Độ trễ click chuột không hợp lệ!");
             return;
         }
         prop.setMouseClickDelay(Integer.parseInt(txt));
+        
         txt = mouseMoveDelay.getText();
         if (!StringUtils.isNonNegativeInt(txt)) {
-            DialogUtils.showErrorDialog("失败", "输入鼠标走子延迟错误");
+            DialogUtils.showErrorDialog("Lỗi", "Độ trễ di chuyển chuột không hợp lệ!");
             return;
         }
         prop.setMouseMoveDelay(Integer.parseInt(txt));
+
+        // Lưu cấu hình xuống file
+        prop.save(); 
 
         App.closeLinkSetting();
     }
 
     public void initialize() {
-
         prop = Properties.getInstance();
 
-        linkScanTime.setText(String.valueOf(prop.getLinkScanTime()));
-        linkThreadNum.setText(String.valueOf(prop.getLinkThreadNum()));
-
-        mouseClickDelay.setText(String.valueOf(prop.getMouseClickDelay()));
-        mouseMoveDelay.setText(String.valueOf(prop.getMouseMoveDelay()));
-
+        if(prop != null) {
+            linkScanTime.setText(String.valueOf(prop.getLinkScanTime()));
+            linkThreadNum.setText(String.valueOf(prop.getLinkThreadNum()));
+            mouseClickDelay.setText(String.valueOf(prop.getMouseClickDelay()));
+            mouseMoveDelay.setText(String.valueOf(prop.getMouseMoveDelay()));
+        }
     }
-
 }

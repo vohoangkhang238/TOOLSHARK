@@ -143,7 +143,7 @@ public class App extends Application {
     public static void openLinkSetting() {
 
         linkSetting = createStage("/fxml/linkSetting.fxml");
-        linkSetting.setTitle("连线设置");
+        linkSetting.setTitle("Thông số kết nối");
         linkSetting.initModality(Modality.APPLICATION_MODAL);
         linkSetting.initOwner(mainStage);
 
