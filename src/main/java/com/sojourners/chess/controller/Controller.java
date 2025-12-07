@@ -32,8 +32,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton; // Import RadioButton
-import javafx.scene.control.ToggleGroup; // Import ToggleGroup
+import javafx.scene.control.RadioButton; 
+import javafx.scene.control.ToggleGroup; 
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
@@ -947,7 +947,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     }
 
     private void setButtonTips() {
-        newButton.setTooltip(new Tooltip("Làm mới bàn cờ"));
+        newButton.setTooltip(new Tooltip("新局面"));
         copyButton.setTooltip(new Tooltip("复制局面"));
         pasteButton.setTooltip(new Tooltip("粘贴局面"));
         backButton.setTooltip(new Tooltip("悔棋"));
@@ -956,7 +956,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         blackButton.setTooltip(new Tooltip("引擎执黑"));
         analysisButton.setTooltip(new Tooltip("分析模式"));
         immediateButton.setTooltip(new Tooltip("立即出招"));
-        linkButton.setTooltip(new Tooltip("Kết nối"));
+        linkButton.setTooltip(new Tooltip("连线"));
         bookSwitchButton.setTooltip(new Tooltip("启用库招"));
 
     }

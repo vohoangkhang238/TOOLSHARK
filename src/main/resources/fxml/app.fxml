@@ -11,7 +11,8 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
-<?import javafx.scene.control.Separator?> <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -19,10 +20,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.control.RadioButton?> <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.RadioButton?> 
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" prefHeight="712.0" prefWidth="924.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sojourners.chess.controller.Controller">
+<BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sojourners.chess.controller.Controller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -138,6 +140,7 @@
                 </RadioButton>
 
                 <RadioButton fx:id="radioSpectator" text="Xem Cờ" toggleGroup="$modeGroup" onAction="#radioModeChanged" />
+                
                 <Button fx:id="copyButton" visible="false" />
                 <Button fx:id="pasteButton" visible="false" />
                 <Button fx:id="backButton" visible="false" />
@@ -151,12 +154,14 @@
             </ToolBar>
          </top>
          <center>
-<SplitPane fx:id="splitPane" dividerPositions="1.0" stylesheets="@../style/split-pane.css" BorderPane.alignment="CENTER">              <items>
+            <SplitPane fx:id="splitPane" dividerPositions="1.0" stylesheets="@../style/split-pane.css" BorderPane.alignment="CENTER">
+              <items>
                 <AnchorPane fx:id="canvasPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
                    <children>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                        <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <center>
-<Canvas fx:id="canvas" height="1.0" onMouseClicked="#canvasClick" width="1.0" BorderPane.alignment="CENTER" />                           </center>
+                              <Canvas fx:id="canvas" height="1.0" onMouseClicked="#canvasClick" width="1.0" />
+                           </center>
                         </BorderPane>
                         <ToolBar fx:id="statusToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="200.0" style="-fx-pref-height: 27px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <items>
@@ -166,6 +171,7 @@
                         </ToolBar>
                      </children>
                   </AnchorPane>
+                
                 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
                      <children>
                         <SplitPane fx:id="splitPane2" dividerPositions="0.6461538461538462" layoutX="32.0" layoutY="111.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
