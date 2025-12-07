@@ -35,11 +35,11 @@
           <Menu mnemonicParsing="false" text="局面" visible="false">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#newButtonClick" text="新局面" />
-                  <MenuItem mnemonicParsing="false" onAction="#editChessBoardClick" text="编辑局面" />
-                  <MenuItem mnemonicParsing="false" onAction="#copyButtonClick" text="复制局面FEN" />
-                  <MenuItem mnemonicParsing="false" onAction="#pasteButtonClick" text="粘贴局面FEN" />
-                  <MenuItem mnemonicParsing="false" onAction="#copyImageMenuClick" text="复制局面图片" />
-                  <MenuItem mnemonicParsing="false" onAction="#pasteImageMenuClick" text="粘贴局面图片" />
+                  <MenuItem mnemonicParsing="false" onAction="#editChessBoardClick" text="编辑局面" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#copyButtonClick" text="复制局面FEN" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#pasteButtonClick" text="粘贴局面FEN" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#copyImageMenuClick" text="复制局面图片" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#pasteImageMenuClick" text="粘贴局面图片" visible="false" />
                   <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="图片导入局面" />
                   <MenuItem mnemonicParsing="false" onAction="#exportImageMenuClick" text="局面导出图片" />
                </items>
@@ -55,7 +55,7 @@
             <Menu mnemonicParsing="false" text="引擎" visible="false">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#engineManageClick" text="引擎管理" />
-                  <MenuItem mnemonicParsing="false" onAction="#timeSettingButtonClick" text="时间设置" />
+                  <MenuItem mnemonicParsing="false" onAction="#timeSettingButtonClick" text="时间设置" visible="false" />
                </items>
             </Menu>
 
