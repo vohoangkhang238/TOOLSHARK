@@ -144,9 +144,21 @@
                      </opaqueInsets>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button fx:id="blackButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#blackButtonClick" style="-fx-background-image: url('/image/robotblack.png');" stylesheets="@../style/app.css" text="Đen" />
-                  <Button fx:id="redButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redButtonClick" style="-fx-background-image: url('/image/robotred.png');" stylesheets="@../style/app.css" text="Đỏ" />
-                  <Button fx:id="analysisButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#analysisButtonClick" style="-fx-background-image: url('/image/lightbulb.png');" stylesheets="@../style/app.css" text="Phân tích" />
+                  <Button fx:id="blackButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#blackButtonClick" style="-fx-background-image: url('/image/robotblack.png');" stylesheets="@../style/app.css" text="Đen" visible="false">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button fx:id="redButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redButtonClick" style="-fx-background-image: url('/image/robotred.png');" stylesheets="@../style/app.css" text="Đỏ" visible="false">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button fx:id="analysisButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#analysisButtonClick" style="-fx-background-image: url('/image/lightbulb.png');" stylesheets="@../style/app.css" text="Phân tích" visible="false">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
                   <Button fx:id="immediateButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#immediateButtonClick" style="-fx-background-image: url('/image/goim.png');" stylesheets="@../style/app.css" text="Tức thì" visible="false">
                      <opaqueInsets>
                         <Insets />
@@ -158,8 +170,8 @@
                      </opaqueInsets>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                  <ComboBox fx:id="linkComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="89.0" stylesheets="@../style/combobox.css" visible="false" />
-                  <Button fx:id="linkButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#linkButtonClick" style="-fx-background-image: url('/image/link.png');" stylesheets="@../style/app.css" text="Kết nối" visible="false">
+                  <ComboBox fx:id="linkComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="89.0" stylesheets="@../style/combobox.css" />
+                  <Button fx:id="linkButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#linkButtonClick" style="-fx-background-image: url('/image/link.png');" stylesheets="@../style/app.css" text="Kết nối">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
