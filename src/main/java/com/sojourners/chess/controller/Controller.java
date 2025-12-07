@@ -111,7 +111,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     private RadioMenuItem menuOfDefaultBoard;
     @FXML
     private RadioMenuItem menuOfCustomBoard;
-
+    
     // THÊM: RadioMenuItem mới cho Link Mode
     @FXML
     private RadioMenuItem menuOfAutoMoveMode;
@@ -671,7 +671,6 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
     @FXML
     void timeSettingButtonClick(ActionEvent e) {
-        // Tính năng này đã được ẩn khỏi menu chính.
         App.openTimeSetting();
     }
 
@@ -971,7 +970,6 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             menuOfAutoMoveMode.setSelected(true);
         }
 
-
         newChessBoard(null);
     }
 
@@ -1103,8 +1101,6 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         }
 
         // Đã xóa logic ComboBox
-        // linkComboBox.getItems().addAll("自动走棋", "观战模式");
-        // linkComboBox.setValue("自动走棋");
     }
 
     private void refreshEngineComboBox() {
@@ -1395,8 +1391,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             board.reverse(isReverseDetected);
 
             // 3. Initiate Link Mode
-            // CẬP NHẬT: Gọi setLinkMode không tham số
-            setLinkMode();
+            setLinkMode(); // CẬP NHẬT: Gọi setLinkMode không tham số
 
             // 4. UI Thread: Resume Linker 
             graphLinker.resume();
@@ -1416,7 +1411,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     // CẬP NHẬT: isWatchMode() đọc trạng thái từ RadioMenuItem
     @Override
     public boolean isWatchMode() {
-        return menuOfSpectatorMode.isSelected();
+        return menuOfSpectatorMode != null && menuOfSpectatorMode.isSelected();
     }
 
     // [FIXED] Thực thi phương thức isReverse() từ LinkerCallBack
