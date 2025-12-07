@@ -31,6 +31,8 @@ public class App extends Application {
     private static Stage linkSetting;
     private static Stage editChessBoard;
 
+
+    
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
