@@ -947,7 +947,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     }
 
     private void setButtonTips() {
-        newButton.setTooltip(new Tooltip("新局面"));
+        newButton.setTooltip(new Tooltip("Làm mới bàn cờ"));
         copyButton.setTooltip(new Tooltip("复制局面"));
         pasteButton.setTooltip(new Tooltip("粘贴局面"));
         backButton.setTooltip(new Tooltip("悔棋"));
@@ -956,7 +956,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         blackButton.setTooltip(new Tooltip("引擎执黑"));
         analysisButton.setTooltip(new Tooltip("分析模式"));
         immediateButton.setTooltip(new Tooltip("立即出招"));
-        linkButton.setTooltip(new Tooltip("连线"));
+        linkButton.setTooltip(new Tooltip("Kết nối"));
         bookSwitchButton.setTooltip(new Tooltip("启用库招"));
 
     }
