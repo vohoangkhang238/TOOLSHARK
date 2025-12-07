@@ -129,11 +129,11 @@
                      </opaqueInsets>
                 </Button>
                 
-                <Button fx:id="autoMoveButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#autoMoveButtonClick" style="-fx-background-image: url('/image/robot.png');" stylesheets="@../style/app.css" text="Auto Move">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                </Button>
+                <Button fx:id="autoMoveButton" contentDisplay="TEXT_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#autoMoveButtonClick" style="-fx-border-color: #888; -fx-border-radius: 3;" stylesheets="@../style/app.css" text="Auto Move">
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</Button>
                 <Button fx:id="copyButton" visible="false" />
                 <Button fx:id="pasteButton" visible="false" />
                 <Button fx:id="backButton" visible="false" />
