@@ -69,11 +69,12 @@
 
             <Menu mnemonicParsing="false" text="设置">
                <items>
-                  <CheckMenuItem fx:id="menuOfStepTip" mnemonicParsing="false" onAction="#stepTipChecked" text="棋步提示" />
-                  <CheckMenuItem fx:id="menuOfStepSound" mnemonicParsing="false" onAction="#stepSoundClick" text="走棋音效" />
-                  <CheckMenuItem fx:id="menuOfShowNumber" mnemonicParsing="false" onAction="#showNumberClick" text="显示线路" />
-                  <CheckMenuItem fx:id="menuOfTopWindow" mnemonicParsing="false" onAction="#topWindowClick" text="窗口置顶" />
-                  <CheckMenuItem fx:id="menuOfShowStatus" mnemonicParsing="false" onAction="#showStatusBarClick" text="显示状态栏" />
+                  <CheckMenuItem fx:id="menuOfStepTip" mnemonicParsing="false" onAction="#stepTipChecked" text="棋步提示" visible="false" />
+                  <CheckMenuItem fx:id="menuOfStepSound" mnemonicParsing="false" onAction="#stepSoundClick" text="走棋音效" visible="false" />
+                  <CheckMenuItem fx:id="menuOfShowNumber" mnemonicParsing="false" onAction="#showNumberClick" text="显示线路" visible="false" />
+                  <CheckMenuItem fx:id="menuOfTopWindow" mnemonicParsing="false" onAction="#topWindowClick" text="窗口置顶" visible="false" />
+                  <CheckMenuItem fx:id="menuOfShowStatus" mnemonicParsing="false" onAction="#showStatusBarClick" text="显示状态栏" visible="false" />
+                  
                   <Menu mnemonicParsing="false" text="棋盘样式">
                      <items>
                         <RadioMenuItem fx:id="menuOfDefaultBoard" mnemonicParsing="false" onAction="#boardStyleSelected" text="默认">
@@ -84,6 +85,7 @@
                         <RadioMenuItem fx:id="menuOfCustomBoard" mnemonicParsing="false" onAction="#boardStyleSelected" text="红黑" toggleGroup="$boardStyle1" />
                      </items>
                   </Menu>
+                  
                   <Menu mnemonicParsing="false" text="棋盘大小">
                     <items>
                         <RadioMenuItem fx:id="menuOfSmallBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="小棋盘">
