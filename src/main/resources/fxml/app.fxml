@@ -23,8 +23,9 @@
 <?import javafx.scene.control.RadioButton?> 
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sojourners.chess.controller.Controller">
+<BorderPane fx:id="borderPane" minHeight="0.0" minWidth="0.0" prefHeight="420.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sojourners.chess.controller.Controller">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -100,7 +101,7 @@
                         <RadioMenuItem fx:id="menuOfMiddleBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Trung bình" toggleGroup="$boardStyle" />
                         <RadioMenuItem fx:id="menuOfBigBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Lớn" toggleGroup="$boardStyle" />
                         <RadioMenuItem fx:id="menuOfLargeBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Rất lớn" toggleGroup="$boardStyle" />
-                        <RadioMenuItem fx:id="menuOfAutoFitBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Tự động" toggleGroup="$boardStyle" />
+                        <RadioMenuItem fx:id="menuOfAutoFitBoard" mnemonicParsing="false" onAction="#boardSizeSelected" selected="true" text="Tự động" toggleGroup="$boardStyle" />
                     </items>
                   </Menu>
                </items>
@@ -133,7 +134,7 @@
                 
                 <Separator orientation="VERTICAL" />
                 
-                <RadioButton fx:id="radioAutoMove" text="Tự Động Chơi" selected="true" onAction="#radioModeChanged">
+                <RadioButton fx:id="radioAutoMove" text="Tự Động" selected="true" onAction="#radioModeChanged">
                     <toggleGroup>
                         <ToggleGroup fx:id="modeGroup" />
                     </toggleGroup>
@@ -154,110 +155,49 @@
             </ToolBar>
          </top>
          <center>
-            <SplitPane fx:id="splitPane" dividerPositions="1.0" stylesheets="@../style/split-pane.css" BorderPane.alignment="CENTER">
-              <items>
-                <AnchorPane fx:id="canvasPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
-                   <children>
-                        <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <center>
-                              <Canvas fx:id="canvas" height="1.0" onMouseClicked="#canvasClick" width="1.0" />
-                           </center>
-                        </BorderPane>
-                        <ToolBar fx:id="statusToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="200.0" style="-fx-pref-height: 27px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                           <items>
-                              <Label fx:id="infoShowLabel" wrapText="true" />
-                              <Label fx:id="timeShowLabel" alignment="CENTER_RIGHT" style="-fx-pref-width: 100px;" textFill="#403e3e" wrapText="true" />
-                           </items>
-                        </ToolBar>
-                     </children>
-                  </AnchorPane>
-                
-                <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
-                     <children>
-                        <SplitPane fx:id="splitPane2" dividerPositions="0.6461538461538462" layoutX="32.0" layoutY="111.0" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <items>
-                              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" visible="false">
-                                 <children>
-                                    <BorderPane fx:id="listViewPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <center>
-                                          <ListView fx:id="listView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" stylesheets="@../style/app.css" BorderPane.alignment="CENTER" />
-                                      </center>
-                                       <top>
-                                        <ToolBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" BorderPane.alignment="CENTER">
-                                                <items>
-                                                 <Label text="Engine" />
-                                                   <ComboBox fx:id="engineComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="95.0" stylesheets="@../style/combobox.css" />
-                                                   <ComboBox fx:id="threadComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="60.0" stylesheets="@../style/combobox.css" />
-                                                   <ComboBox fx:id="hashComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="65.0" stylesheets="@../style/combobox.css" />
-                                                    <Label text="MB" />
-                                               </items>
-                                              </ToolBar>
-                                       </top>
-                                    </BorderPane>
-                                 </children></AnchorPane>
-                             <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" visible="false">
-                                 <children>
-                                     <TabPane side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                      <tabs>
-                                          <Tab text="Ván cờ">
-                                             <content>
-                                                 <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                                   <center>
-                                                       <TableView fx:id="recordTable" onMouseClicked="#recordTableClick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 100%;" stylesheets="@../style/table.css" BorderPane.alignment="CENTER">
-                                                          <columns>
-                                                              <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Số TT" />
-                                                            <TableColumn editable="false" prefWidth="120.0" sortable="false" text="Nước đi" />
-                                                                <TableColumn editable="false" prefWidth="90.0" sortable="false" text="Điểm" />
-                                                           </columns>
-                                                        </TableView>
-                                                   </center>
-                                                    <bottom>
-                                                       <ToolBar minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="28.0" prefWidth="200.0" style="-fx-background-insets: 28px;" BorderPane.alignment="CENTER">
-                                                          <items>
-                                                             <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#finalButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-left.png');" stylesheets="@../style/app.css" text="Chuyển cuối" />
-                                                              <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#forwardButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-left.png');" stylesheets="@../style/app.css" text="Lùi một" />
-                                                              <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-right.png');" stylesheets="@../style/app.css" text="Tiến một" />
-                                                              <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#frontButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-right.png');" stylesheets="@../style/app.css" text="Chuyển đầu" />
-                                                          </items>
-                                                        </ToolBar>
-                                                     </bottom>
-                                                  </BorderPane>
-                                             </content>
-                                          </Tab>
-                                            <Tab text="Biểu đồ cục diện">
-                                                <content>
-                                                    <BorderPane fx:id="charPane" prefHeight="200.0" prefWidth="200.0" />
-                                                </content>
-                                            </Tab>
-                                          <Tab text="Kho nước đi">
-                                                 <content>
-                                                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                                       <center>
-                                                         <TableView fx:id="bookTable" onMouseClicked="#bookTableClick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 100%;" stylesheets="@../style/table.css" BorderPane.alignment="CENTER">
-                                                            <columns>
-                                                                <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Nước đi" />
-                                                              <TableColumn editable="false" prefWidth="64.0" sortable="false" text="Điểm" />
-                                                                  <TableColumn editable="false" prefWidth="64.0" sortable="false" text="Tỷ lệ thắng" />
-                                                                   <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Thắng" />
-                                                                <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Hòa" />
-                                                                  <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Thua" />
-                                                                   <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Ghi chú" />
-                                                                <TableColumn editable="false" sortable="false" text="Nguồn" />
-                                                                    </columns>
-                                                        </TableView>
-                                                         </center>
-                                                    </BorderPane>
-                                                </content></Tab>
-                                      </tabs>
-                                    </TabPane>
-                                 </children></AnchorPane>
-                          </items>
-                        </SplitPane>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
+            <AnchorPane fx:id="canvasPane">
+               <children>
+                    <BorderPane AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                       <center>
+                          <Canvas fx:id="canvas" height="1.0" onMouseClicked="#canvasClick" width="1.0" />
+                       </center>
+                    </BorderPane>
+                    <ToolBar fx:id="statusToolBar" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="27.0" style="-fx-pref-height: 27px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                       <items>
+                          <Label fx:id="infoShowLabel" wrapText="true" />
+                          <Label fx:id="timeShowLabel" alignment="CENTER_RIGHT" style="-fx-pref-width: 100px;" textFill="#403e3e" wrapText="true" />
+                       </items>
+                    </ToolBar>
+                 </children>
+              </AnchorPane>
          </center>
+
+         <bottom>
+             <VBox visible="false" managed="false" prefHeight="0" prefWidth="0">
+                 <children>
+                     <SplitPane fx:id="splitPane" dividerPositions="1.0"/>
+                     <SplitPane fx:id="splitPane2" />
+                     <BorderPane fx:id="listViewPane" />
+                     <ListView fx:id="listView" />
+                     <ComboBox fx:id="engineComboBox" />
+                     <ComboBox fx:id="threadComboBox" />
+                     <ComboBox fx:id="hashComboBox" />
+                     <TableView fx:id="recordTable">
+                        <columns>
+                            <TableColumn text="1" /><TableColumn text="2" /><TableColumn text="3" />
+                        </columns>
+                     </TableView>
+                     <BorderPane fx:id="charPane" />
+                     <TableView fx:id="bookTable">
+                        <columns>
+                            <TableColumn text="1" /><TableColumn text="2" /><TableColumn text="3" />
+                            <TableColumn text="4" /><TableColumn text="5" /><TableColumn text="6" />
+                            <TableColumn text="7" /><TableColumn text="8" />
+                        </columns>
+                     </TableView>
+                 </children>
+             </VBox>
+         </bottom>
       </BorderPane>
    </center>
 </BorderPane>

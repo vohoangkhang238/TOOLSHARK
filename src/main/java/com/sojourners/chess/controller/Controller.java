@@ -32,8 +32,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton; 
-import javafx.scene.control.ToggleGroup; 
+import javafx.scene.control.RadioButton; // Import RadioButton
+import javafx.scene.control.ToggleGroup; // Import ToggleGroup
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
@@ -843,11 +843,21 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
         useOpenBook.setValue(prop.getBookSwitch());
 
-        // [MODIFIED] Mặc định ẩn thanh bên phải
+        // [MODIFIED] Ép buộc chế độ Mini khi khởi động
+        // 1. Set mặc định là AUTO_FIT
+        prop.setBoardSize(ChessBoard.BoardSize.AUTOFIT_BOARD);
+        if (menuOfAutoFitBoard != null) {
+            menuOfAutoFitBoard.setSelected(true);
+        }
+
+        // 2. Ép ẩn thanh bên phải và resize bàn cờ
         Platform.runLater(() -> {
             if (splitPane != null) {
                 splitPane.setDividerPositions(1.0);
             }
+            // Gọi hàm autoFitSize ngay lập tức để bàn cờ co lại vừa khít cửa sổ nhỏ
+            board.setBoardSize(ChessBoard.BoardSize.AUTOFIT_BOARD);
+            board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), 1.0, prop.isLinkShowInfo());
         });
     }
 
@@ -956,7 +966,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         blackButton.setTooltip(new Tooltip("引擎执黑"));
         analysisButton.setTooltip(new Tooltip("分析模式"));
         immediateButton.setTooltip(new Tooltip("立即出招"));
-        linkButton.setTooltip(new Tooltip("连线"));
+        linkButton.setTooltip(new Tooltip("Kết nối Auto")); // Đã sửa Tooltip theo yêu cầu
         bookSwitchButton.setTooltip(new Tooltip("启用库招"));
 
     }
@@ -1423,7 +1433,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             // 2. UI Thread: Update state
             newChessBoard(fenCode);
 
-            // Cập nhật biến isReverse và ép bàn cờ theo đúng trạng thái Linker tìm thấy
+            // Cập nhật biến isReverse和 ép bàn cờ theo đúng trạng thái Linker tìm thấy
             isReverse.setValue(isReverseDetected);
             board.reverse(isReverseDetected);
 
