@@ -118,17 +118,17 @@
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets></Button>
-                  <Button fx:id="copyButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyButtonClick" style="-fx-background-image: url('/image/copy.png');" stylesheets="@../style/app.css" text="Button">
+                  <Button fx:id="copyButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyButtonClick" style="-fx-background-image: url('/image/copy.png');" stylesheets="@../style/app.css" text="Button" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="pasteButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pasteButtonClick" style="-fx-background-image: url('/image/paste.png');" stylesheets="@../style/app.css" text="Button">
+                  <Button fx:id="pasteButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pasteButtonClick" style="-fx-background-image: url('/image/paste.png');" stylesheets="@../style/app.css" text="Button" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
                   <Button fx:id="backButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#regretButtonClick" style="-fx-background-image: url('/image/back.png');" stylesheets="@../style/app.css" text="Button">
                      <opaqueInsets>
                         <Insets />
@@ -160,12 +160,12 @@
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="bookSwitchButton" contentDisplay="GRAPHIC_ONLY" layoutX="254.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bookSwitchButtonClick" style="-fx-background-image: url('/image/cloud.png');" stylesheets="@../style/app.css" text="Button">
+                  <Button fx:id="bookSwitchButton" contentDisplay="GRAPHIC_ONLY" layoutX="254.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bookSwitchButtonClick" style="-fx-background-image: url('/image/cloud.png');" stylesheets="@../style/app.css" text="Button" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
                   <ComboBox fx:id="linkComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="89.0" stylesheets="@../style/combobox.css" />
                   <Button fx:id="linkButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#linkButtonClick" style="-fx-background-image: url('/image/link.png');" stylesheets="@../style/app.css" text="Button">
                      <opaqueInsets>
