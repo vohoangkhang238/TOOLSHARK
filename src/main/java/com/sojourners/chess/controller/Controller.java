@@ -32,8 +32,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToolBar;
@@ -185,6 +187,14 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     @FXML
     private TableView<BookData> bookTable;
 
+    // Thêm khai báo cho Radio Buttons và Toggle Group mới
+@FXML
+private RadioButton radioAutoMove;
+@FXML
+private RadioButton radioSpectator;
+@FXML
+private ToggleGroup modeGroup;
+
     private SimpleObjectProperty<Boolean> robotRed = new SimpleObjectProperty<>(false);
     private SimpleObjectProperty<Boolean> robotBlack = new SimpleObjectProperty<>(false);
     private SimpleObjectProperty<Boolean> robotAnalysis = new SimpleObjectProperty<>(false);
@@ -201,6 +211,31 @@ public class Controller implements EngineCallBack, LinkerCallBack {
      * 正在思考（用于连线判断）
      */
     private volatile boolean isThinking;
+
+
+    // Thêm hàm này vào cuối class Controller
+@FXML
+private void radioModeChanged(ActionEvent event) {
+    // 1. Kiểm tra Radio Button nào được chọn
+    if (radioAutoMove.isSelected()) {
+        System.out.println("Chế độ ToolBar: Auto Move được chọn.");
+        // 2. Kích hoạt RadioMenuItem tương ứng trong Menu
+        if (menuOfAutoMoveMode != null) {
+            menuOfAutoMoveMode.setSelected(true);
+            // 3. Gọi logic xử lý chuyển chế độ
+            linkModeSelected(new ActionEvent(menuOfAutoMoveMode, null));
+        }
+        
+    } else if (radioSpectator.isSelected()) {
+        System.out.println("Chế độ ToolBar: Quan sát được chọn.");
+        // 2. Kích hoạt RadioMenuItem tương ứng trong Menu
+        if (menuOfSpectatorMode != null) {
+            menuOfSpectatorMode.setSelected(true);
+            // 3. Gọi logic xử lý chuyển chế độ
+            linkModeSelected(new ActionEvent(menuOfSpectatorMode, null));
+        }
+    }
+}
 
     @FXML
     public void newButtonClick(ActionEvent event) {
