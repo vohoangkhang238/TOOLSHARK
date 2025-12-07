@@ -32,10 +32,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.RadioButton; // Import RadioButton
+import javafx.scene.control.ToggleGroup; // Import ToggleGroup
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToolBar;
@@ -159,10 +159,14 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     @FXML
     private Button backButton;
 
-    // --- [ADDED] KHAI BÁO NÚT AUTO MOVE MỚI ---
+    // --- [MỚI] KHAI BÁO RADIO BUTTONS VÀ GROUP ---
     @FXML
-    private Button autoMoveButton;
-    // ------------------------------------------
+    private RadioButton radioAutoMove;
+    @FXML
+    private RadioButton radioSpectator;
+    @FXML
+    private ToggleGroup modeGroup;
+    // ----------------------------------------------
 
     @FXML
     private BorderPane charPane;
@@ -187,14 +191,6 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     @FXML
     private TableView<BookData> bookTable;
 
-    // Thêm khai báo cho Radio Buttons và Toggle Group mới
-@FXML
-private RadioButton radioAutoMove;
-@FXML
-private RadioButton radioSpectator;
-@FXML
-private ToggleGroup modeGroup;
-
     private SimpleObjectProperty<Boolean> robotRed = new SimpleObjectProperty<>(false);
     private SimpleObjectProperty<Boolean> robotBlack = new SimpleObjectProperty<>(false);
     private SimpleObjectProperty<Boolean> robotAnalysis = new SimpleObjectProperty<>(false);
@@ -212,30 +208,30 @@ private ToggleGroup modeGroup;
      */
     private volatile boolean isThinking;
 
-
-    // Thêm hàm này vào cuối class Controller
-@FXML
-private void radioModeChanged(ActionEvent event) {
-    // 1. Kiểm tra Radio Button nào được chọn
-    if (radioAutoMove.isSelected()) {
-        System.out.println("Chế độ ToolBar: Auto Move được chọn.");
-        // 2. Kích hoạt RadioMenuItem tương ứng trong Menu
-        if (menuOfAutoMoveMode != null) {
-            menuOfAutoMoveMode.setSelected(true);
-            // 3. Gọi logic xử lý chuyển chế độ
-            linkModeSelected(new ActionEvent(menuOfAutoMoveMode, null));
-        }
-        
-    } else if (radioSpectator.isSelected()) {
-        System.out.println("Chế độ ToolBar: Quan sát được chọn.");
-        // 2. Kích hoạt RadioMenuItem tương ứng trong Menu
-        if (menuOfSpectatorMode != null) {
-            menuOfSpectatorMode.setSelected(true);
-            // 3. Gọi logic xử lý chuyển chế độ
-            linkModeSelected(new ActionEvent(menuOfSpectatorMode, null));
+    // --- [MỚI] HÀM XỬ LÝ CHUYỂN ĐỔI RADIO BUTTON ---
+    @FXML
+    private void radioModeChanged(ActionEvent event) {
+        // 1. Kiểm tra Radio Button nào được chọn
+        if (radioAutoMove != null && radioAutoMove.isSelected()) {
+            System.out.println("Chế độ ToolBar: Auto Move được chọn.");
+            // 2. Kích hoạt RadioMenuItem tương ứng trong Menu
+            if (menuOfAutoMoveMode != null) {
+                menuOfAutoMoveMode.setSelected(true);
+                // 3. Gọi logic xử lý chuyển chế độ
+                linkModeSelected(new ActionEvent(menuOfAutoMoveMode, null));
+            }
+            
+        } else if (radioSpectator != null && radioSpectator.isSelected()) {
+            System.out.println("Chế độ ToolBar: Quan sát được chọn.");
+            // 2. Kích hoạt RadioMenuItem tương ứng trong Menu
+            if (menuOfSpectatorMode != null) {
+                menuOfSpectatorMode.setSelected(true);
+                // 3. Gọi logic xử lý chuyển chế độ
+                linkModeSelected(new ActionEvent(menuOfSpectatorMode, null));
+            }
         }
     }
-}
+    // --------------------------------------------------
 
     @FXML
     public void newButtonClick(ActionEvent event) {
@@ -765,21 +761,6 @@ private void radioModeChanged(ActionEvent event) {
             stopGraphLink();
         }
     }
-    
-    // --- [ADDED] HÀM XỬ LÝ SỰ KIỆN NÚT AUTO MOVE ---
-    @FXML
-    private void autoMoveButtonClick(ActionEvent event) {
-        if (menuOfAutoMoveMode != null) {
-            // 1. Chọn chế độ trong menu
-            menuOfAutoMoveMode.setSelected(true);
-            
-            // 2. Kích hoạt logic chọn chế độ
-            linkModeSelected(new ActionEvent(menuOfAutoMoveMode, null));
-            
-            System.out.println("Đã kích hoạt Auto Move từ nút bấm.");
-        }
-    }
-    // -----------------------------------------------
 
     private void initLineChart() {
         final NumberAxis xAxis = new NumberAxis();
@@ -1172,7 +1153,8 @@ private void radioModeChanged(ActionEvent event) {
         addListener(linkButton, linkMode);
         addListener(bookSwitchButton, useOpenBook);
         // ADDED: Listener cho nút Auto Move mới
-        addListener(autoMoveButton, new SimpleObjectProperty<>(false)); // Tạm thời dùng dummy property để có hiệu ứng hover
+        // Xóa listener này vì nút autoMoveButton đã bị xóa
+        // addListener(autoMoveButton, new SimpleObjectProperty<>(false)); 
 
         threadComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
