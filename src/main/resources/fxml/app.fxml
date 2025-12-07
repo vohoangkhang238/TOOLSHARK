@@ -26,86 +26,86 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="文件" visible="false">
+          <Menu mnemonicParsing="false" text="Tệp" visible="false">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#exit" text="退出" />
+              <MenuItem mnemonicParsing="false" onAction="#exit" text="Thoát" />
             </items>
           </Menu>
 
-          <Menu mnemonicParsing="false" text="局面" visible="false">
+          <Menu mnemonicParsing="false" text="Cục diện" visible="false">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#newButtonClick" text="新局面" />
-                  <MenuItem mnemonicParsing="false" onAction="#editChessBoardClick" text="编辑局面" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#copyButtonClick" text="复制局面FEN" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#pasteButtonClick" text="粘贴局面FEN" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#copyImageMenuClick" text="复制局面图片" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#pasteImageMenuClick" text="粘贴局面图片" visible="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="图片导入局面" />
-                  <MenuItem mnemonicParsing="false" onAction="#exportImageMenuClick" text="局面导出图片" />
+                  <MenuItem mnemonicParsing="false" onAction="#newButtonClick" text="Cục diện mới" />
+                  <MenuItem mnemonicParsing="false" onAction="#editChessBoardClick" text="Chỉnh sửa cục diện" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#copyButtonClick" text="Sao chép FEN" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#pasteButtonClick" text="Dán FEN" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#copyImageMenuClick" text="Sao chép ảnh cục diện" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#pasteImageMenuClick" text="Dán ảnh cục diện" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="Nhập ảnh cục diện" />
+                  <MenuItem mnemonicParsing="false" onAction="#exportImageMenuClick" text="Xuất ảnh cục diện" />
                </items>
             </Menu>
 
-            <Menu mnemonicParsing="false" text="开局库" visible="false">
+            <Menu mnemonicParsing="false" text="Kho Khai cuộc" visible="false">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#bookSettingButtonClick" text="库招设置" />
-                  <MenuItem mnemonicParsing="false" onAction="#localBookManageButtonClick" text="本地库管理" />
+                  <MenuItem mnemonicParsing="false" onAction="#bookSettingButtonClick" text="Cài đặt kho nước đi" />
+                  <MenuItem mnemonicParsing="false" onAction="#localBookManageButtonClick" text="Quản lý kho cục bộ" />
                </items>
             </Menu>
 
-            <Menu mnemonicParsing="false" text="引擎" visible="false">
+            <Menu mnemonicParsing="false" text="Engine" visible="false">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#engineManageClick" text="引擎管理" />
-                  <MenuItem mnemonicParsing="false" onAction="#timeSettingButtonClick" text="时间设置" visible="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#engineManageClick" text="Quản lý Engine" />
+                  <MenuItem mnemonicParsing="false" onAction="#timeSettingButtonClick" text="Cài đặt thời gian" visible="false" />
                </items>
             </Menu>
 
-            <Menu mnemonicParsing="false" text="连线">
+            <Menu mnemonicParsing="false" text="Kết nối">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#linkSettingClick" text="连线参数" />
-                  <CheckMenuItem fx:id="menuOfLinkBackMode" mnemonicParsing="false" onAction="#linkBackModeChecked" text="后台连线" />
-                  <CheckMenuItem fx:id="menuOfLinkAnimation" mnemonicParsing="false" onAction="#linkAnimationChecked" text="开启动画确认" />
+                  <MenuItem mnemonicParsing="false" onAction="#linkSettingClick" text="Thông số kết nối" />
+                  <CheckMenuItem fx:id="menuOfLinkBackMode" mnemonicParsing="false" onAction="#linkBackModeChecked" text="Kết nối nền" />
+                  <CheckMenuItem fx:id="menuOfLinkAnimation" mnemonicParsing="false" onAction="#linkAnimationChecked" text="Xác nhận Animation" />
                </items>
             </Menu>
 
-            <Menu mnemonicParsing="false" text="设置">
+            <Menu mnemonicParsing="false" text="Cài đặt">
                <items>
-                  <CheckMenuItem fx:id="menuOfStepTip" mnemonicParsing="false" onAction="#stepTipChecked" text="棋步提示" visible="false" />
-                  <CheckMenuItem fx:id="menuOfStepSound" mnemonicParsing="false" onAction="#stepSoundClick" text="走棋音效" visible="false" />
-                  <CheckMenuItem fx:id="menuOfShowNumber" mnemonicParsing="false" onAction="#showNumberClick" text="显示线路" visible="false" />
-                  <CheckMenuItem fx:id="menuOfTopWindow" mnemonicParsing="false" onAction="#topWindowClick" text="窗口置顶" visible="false" />
-                  <CheckMenuItem fx:id="menuOfShowStatus" mnemonicParsing="false" onAction="#showStatusBarClick" text="显示状态栏" visible="false" />
+                  <CheckMenuItem fx:id="menuOfStepTip" mnemonicParsing="false" onAction="#stepTipChecked" text="Gợi ý nước đi" visible="false" />
+                  <CheckMenuItem fx:id="menuOfStepSound" mnemonicParsing="false" onAction="#stepSoundClick" text="Âm thanh nước đi" visible="false" />
+                  <CheckMenuItem fx:id="menuOfShowNumber" mnemonicParsing="false" onAction="#showNumberClick" text="Hiển thị đường đi" visible="false" />
+                  <CheckMenuItem fx:id="menuOfTopWindow" mnemonicParsing="false" onAction="#topWindowClick" text="Cửa sổ nổi" visible="false" />
+                  <CheckMenuItem fx:id="menuOfShowStatus" mnemonicParsing="false" onAction="#showStatusBarClick" text="Hiển thị thanh trạng thái" visible="false" />
                   
-                  <Menu mnemonicParsing="false" text="棋盘样式">
+                  <Menu mnemonicParsing="false" text="Kiểu bàn cờ">
                      <items>
-                        <RadioMenuItem fx:id="menuOfDefaultBoard" mnemonicParsing="false" onAction="#boardStyleSelected" text="默认">
+                        <RadioMenuItem fx:id="menuOfDefaultBoard" mnemonicParsing="false" onAction="#boardStyleSelected" text="Mặc định">
                            <toggleGroup>
                               <ToggleGroup fx:id="boardStyle1" />
                            </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem fx:id="menuOfCustomBoard" mnemonicParsing="false" onAction="#boardStyleSelected" text="红黑" toggleGroup="$boardStyle1" />
+                        <RadioMenuItem fx:id="menuOfCustomBoard" mnemonicParsing="false" onAction="#boardStyleSelected" text="Đỏ đen" toggleGroup="$boardStyle1" />
                      </items>
                   </Menu>
                   
-                  <Menu mnemonicParsing="false" text="棋盘大小">
+                  <Menu mnemonicParsing="false" text="Kích thước bàn cờ">
                     <items>
-                        <RadioMenuItem fx:id="menuOfSmallBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="小棋盘">
+                        <RadioMenuItem fx:id="menuOfSmallBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Nhỏ">
                            <toggleGroup>
                               <ToggleGroup fx:id="boardStyle" />
                            </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem fx:id="menuOfMiddleBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="中棋盘" toggleGroup="$boardStyle" />
-                        <RadioMenuItem fx:id="menuOfBigBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="大棋盘" toggleGroup="$boardStyle" />
-                        <RadioMenuItem fx:id="menuOfLargeBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="超大棋盘" toggleGroup="$boardStyle" />
-                        <RadioMenuItem fx:id="menuOfAutoFitBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="自适应" toggleGroup="$boardStyle" />
+                        <RadioMenuItem fx:id="menuOfMiddleBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Trung bình" toggleGroup="$boardStyle" />
+                        <RadioMenuItem fx:id="menuOfBigBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Lớn" toggleGroup="$boardStyle" />
+                        <RadioMenuItem fx:id="menuOfLargeBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Rất lớn" toggleGroup="$boardStyle" />
+                        <RadioMenuItem fx:id="menuOfAutoFitBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="Tự động" toggleGroup="$boardStyle" />
                     </items>
                   </Menu>
                </items>
             </Menu>
 
-            <Menu mnemonicParsing="false" text="帮助" visible="false">
+            <Menu mnemonicParsing="false" text="Trợ giúp" visible="false">
                <items>
-                 <MenuItem mnemonicParsing="false" onAction="#homeClick" text="主页" />
-                 <MenuItem mnemonicParsing="false" onAction="#aboutClick" text="关于" />
+                 <MenuItem mnemonicParsing="false" onAction="#homeClick" text="Trang chủ" />
+                 <MenuItem mnemonicParsing="false" onAction="#aboutClick" text="Về chúng tôi" />
                </items>
             </Menu>
         </menus>
@@ -116,66 +116,50 @@
          <top>
             <ToolBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" BorderPane.alignment="CENTER">
               <items>
-                <Button fx:id="newButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newButtonClick" style="-fx-background-image: url('/image/file-plus.png');" stylesheets="@../style/app.css" text="新建">
+                <Button fx:id="newButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newButtonClick" style="-fx-background-image: url('/image/file-plus.png');" stylesheets="@../style/app.css" text="Tạo mới">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets></Button>
-                  <Button fx:id="copyButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyButtonClick" style="-fx-background-image: url('/image/copy.png');" stylesheets="@../style/app.css" text="Button" visible="false">
+                  <Button fx:id="copyButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyButtonClick" style="-fx-background-image: url('/image/copy.png');" stylesheets="@../style/app.css" text="Sao chép" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="pasteButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pasteButtonClick" style="-fx-background-image: url('/image/paste.png');" stylesheets="@../style/app.css" text="Button" visible="false">
+                  <Button fx:id="pasteButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#pasteButtonClick" style="-fx-background-image: url('/image/paste.png');" stylesheets="@../style/app.css" text="Dán" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
                   
-                  <Button fx:id="backButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#regretButtonClick" style="-fx-background-image: url('/image/back.png');" stylesheets="@../style/app.css" text="Button" visible="false">
+                  <Button fx:id="backButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#regretButtonClick" style="-fx-background-image: url('/image/back.png');" stylesheets="@../style/app.css" text="Hoàn tác" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
                   
-                  <Button fx:id="reverseButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reverseButtonClick" style="-fx-background-image: url('/image/reverse.png');" stylesheets="@../style/app.css" text="Button" visible="false">
+                  <Button fx:id="reverseButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reverseButtonClick" style="-fx-background-image: url('/image/reverse.png');" stylesheets="@../style/app.css" text="Đảo chiều" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
-                  <Button fx:id="blackButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#blackButtonClick" style="-fx-background-image: url('/image/robotblack.png');" stylesheets="@../style/app.css" text="Button">
+                  <Button fx:id="blackButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#blackButtonClick" style="-fx-background-image: url('/image/robotblack.png');" stylesheets="@../style/app.css" text="Đen" />
+                  <Button fx:id="redButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redButtonClick" style="-fx-background-image: url('/image/robotred.png');" stylesheets="@../style/app.css" text="Đỏ" />
+                  <Button fx:id="analysisButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#analysisButtonClick" style="-fx-background-image: url('/image/lightbulb.png');" stylesheets="@../style/app.css" text="Phân tích" />
+                  <Button fx:id="immediateButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#immediateButtonClick" style="-fx-background-image: url('/image/goim.png');" stylesheets="@../style/app.css" text="Tức thì" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
-                  <Button fx:id="redButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#redButtonClick" style="-fx-background-image: url('/image/robotred.png');" stylesheets="@../style/app.css" text="Button">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button fx:id="analysisButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#analysisButtonClick" style="-fx-background-image: url('/image/lightbulb.png');" stylesheets="@../style/app.css" text="Button">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button fx:id="immediateButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#immediateButtonClick" style="-fx-background-image: url('/image/goim.png');" stylesheets="@../style/app.css" text="Button" visible="false">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button fx:id="bookSwitchButton" contentDisplay="GRAPHIC_ONLY" layoutX="254.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bookSwitchButtonClick" style="-fx-background-image: url('/image/cloud.png');" stylesheets="@../style/app.css" text="Button" visible="false">
+                  <Button fx:id="bookSwitchButton" contentDisplay="GRAPHIC_ONLY" layoutX="254.0" layoutY="8.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#bookSwitchButtonClick" style="-fx-background-image: url('/image/cloud.png');" stylesheets="@../style/app.css" text="Kho nước đi" visible="false">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                   </Button>
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
                   <ComboBox fx:id="linkComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="89.0" stylesheets="@../style/combobox.css" />
-                  <Button fx:id="linkButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#linkButtonClick" style="-fx-background-image: url('/image/link.png');" stylesheets="@../style/app.css" text="Button">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
+                  <Button fx:id="linkButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#linkButtonClick" style="-fx-background-image: url('/image/link.png');" stylesheets="@../style/app.css" text="Kết nối" />
               </items>
             </ToolBar>
          </top>
@@ -210,7 +194,7 @@
                                        <top>
                                            <ToolBar minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" BorderPane.alignment="CENTER">
                                              <items>
-                                                <Label text="引擎" />
+                                                <Label text="Engine" />
                                                 <ComboBox fx:id="engineComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="95.0" stylesheets="@../style/combobox.css" />
                                                 <ComboBox fx:id="threadComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="60.0" stylesheets="@../style/combobox.css" />
                                                 <ComboBox fx:id="hashComboBox" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="65.0" stylesheets="@../style/combobox.css" />
@@ -224,50 +208,50 @@
                                  <children>
                                      <TabPane side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <tabs>
-                                         <Tab text="棋谱">
+                                         <Tab text="Ván cờ">
                                              <content>
                                                  <BorderPane prefHeight="200.0" prefWidth="200.0">
                                                    <center>
                                                        <TableView fx:id="recordTable" onMouseClicked="#recordTableClick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 100%;" stylesheets="@../style/table.css" BorderPane.alignment="CENTER">
                                                         <columns>
-                                                           <TableColumn editable="false" prefWidth="60.0" sortable="false" text="序号" />
-                                                          <TableColumn editable="false" prefWidth="120.0" sortable="false" text="着法" />
-                                                             <TableColumn editable="false" prefWidth="90.0" sortable="false" text="分数" />
+                                                           <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Số TT" />
+                                                          <TableColumn editable="false" prefWidth="120.0" sortable="false" text="Nước đi" />
+                                                             <TableColumn editable="false" prefWidth="90.0" sortable="false" text="Điểm" />
                                                          </columns>
                                                       </TableView>
                                                    </center>
                                                    <bottom>
                                                        <ToolBar minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="28.0" prefWidth="200.0" style="-fx-background-insets: 28px;" BorderPane.alignment="CENTER">
                                                         <items>
-                                                           <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#finalButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-left.png');" stylesheets="@../style/app.css" text="Button" />
-                                                            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#forwardButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-left.png');" stylesheets="@../style/app.css" text="Button" />
-                                                            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-right.png');" stylesheets="@../style/app.css" text="Button" />
-                                                            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#frontButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-right.png');" stylesheets="@../style/app.css" text="Button" />
+                                                           <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#finalButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-left.png');" stylesheets="@../style/app.css" text="Chuyển cuối" />
+                                                            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#forwardButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-left.png');" stylesheets="@../style/app.css" text="Lùi một" />
+                                                            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#backButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-right.png');" stylesheets="@../style/app.css" text="Tiến một" />
+                                                            <Button contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#frontButtonClick" prefHeight="24.0" prefWidth="24.0" style="-fx-background-image: url('/image/arrow-double-right.png');" stylesheets="@../style/app.css" text="Chuyển đầu" />
                                                         </items>
                                                        </ToolBar>
                                                    </bottom>
                                                  </BorderPane>
                                              </content>
                                         </Tab>
-                                         <Tab text="局势图">
+                                         <Tab text="Biểu đồ cục diện">
                                              <content>
                                                  <BorderPane fx:id="charPane" prefHeight="200.0" prefWidth="200.0" />
                                              </content>
                                          </Tab>
-                                        <Tab text="库招">
+                                        <Tab text="Kho nước đi">
                                               <content>
                                                 <BorderPane prefHeight="200.0" prefWidth="200.0">
                                                     <center>
                                                       <TableView fx:id="bookTable" onMouseClicked="#bookTableClick" prefHeight="200.0" prefWidth="200.0" style="-fx-background-insets: 100%;" stylesheets="@../style/table.css" BorderPane.alignment="CENTER">
                                                         <columns>
-                                                           <TableColumn editable="false" prefWidth="75.0" sortable="false" text="招法" />
-                                                          <TableColumn editable="false" prefWidth="64.0" sortable="false" text="分数" />
-                                                             <TableColumn editable="false" prefWidth="64.0" sortable="false" text="胜率" />
-                                                             <TableColumn editable="false" prefWidth="60.0" sortable="false" text="胜" />
-                                                            <TableColumn editable="false" prefWidth="60.0" sortable="false" text="和" />
-                                                             <TableColumn editable="false" prefWidth="60.0" sortable="false" text="负" />
-                                                             <TableColumn editable="false" prefWidth="75.0" sortable="false" text="备注" />
-                                                            <TableColumn editable="false" sortable="false" text="来源" />
+                                                           <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Nước đi" />
+                                                          <TableColumn editable="false" prefWidth="64.0" sortable="false" text="Điểm" />
+                                                             <TableColumn editable="false" prefWidth="64.0" sortable="false" text="Tỷ lệ thắng" />
+                                                             <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Thắng" />
+                                                            <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Hòa" />
+                                                             <TableColumn editable="false" prefWidth="60.0" sortable="false" text="Thua" />
+                                                             <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Ghi chú" />
+                                                            <TableColumn editable="false" sortable="false" text="Nguồn" />
                                                          </columns>
                                                       </TableView>
                                                   </center>
