@@ -1,79 +1,72 @@
-/* File: src/main/resources/style/full-theme.css (Cập nhật cho Nền Sáng) */
+/* File: src/main/resources/style/full-theme.css (Transparent Tech Theme) */
 
-/* --- 1. GLOBALS & WINDOW BACKGROUND (Nền Sáng Nhẹ) --- */
+/* --- 1. GLOBALS & WINDOW BACKGROUND (Nền trong suốt) --- */
+/* ĐẶT MÀU NỀN CỦA FXML LÀ TRONG SUỐT (CRITICAL) */
 .root {
-    -fx-background-color: #f4f4f4; /* Nền xám nhạt (Light Grey) */
-    -fx-font-family: 'Segoe UI', sans-serif;
+    -fx-background-color: transparent; 
+    -fx-font-family: 'Consolas', 'Courier New', monospace; 
     -fx-font-size: 13px;
-    -fx-text-fill: #333333; /* Chữ tối */
+    -fx-text-fill: #E0FFFF; /* Chữ Cyan sáng */
 }
 
-/* --- 2. MENU BAR & TOOL BAR (Thanh công cụ) --- */
+/* --- 2. MENU BAR & TOOL BAR (Hiệu ứng Glass/Acrylic) --- */
 .menu-bar {
-    -fx-background-color: #ffffff; /* Trắng */
-    -fx-border-color: #cccccc; /* Viền xám nhẹ */
+    -fx-background-color: rgba(10, 20, 30, 0.7); /* Nền bán trong suốt */
+    -fx-border-color: #00BCD4; /* Viền Neon Cyan */
     -fx-border-width: 0 0 1px 0;
 }
 
 .menu-item .label, .menu .label {
-    -fx-text-fill: #333333; /* Chữ menu màu tối */
+    -fx-text-fill: #00BCD4; 
 }
 
 /* Tool Bar Styling (Chứa RadioButton) */
 .tool-bar {
-    -fx-background-color: #ffffff; 
-    -fx-border-color: #eeeeee;
+    -fx-background-color: rgba(20, 35, 50, 0.8); /* Nền bán trong suốt hơi mờ hơn */
+    -fx-border-color: rgba(0, 188, 212, 0.3);
     -fx-border-width: 0 0 1px 0;
     -fx-spacing: 12;
     -fx-padding: 5 10 5 10;
 }
 
-/* --- 3. BUTTONS & ACCENTS (Điểm nhấn màu xanh dương) --- */
-
-/* Nút biểu tượng (Tạo mới, Kết nối) */
+/* --- 3. BUTTONS & NEON GLOW EFFECTS --- */
 .button {
     -fx-background-color: transparent;
-    -fx-text-fill: #1a73e8; /* Blue accent */
-    -fx-border-color: #999999; /* Viền xám */
+    -fx-text-fill: #00BCD4;
+    -fx-border-color: #00BCD4;
     -fx-border-width: 1px;
+    -fx-background-radius: 4;
     -fx-border-radius: 4;
-    -fx-padding: 3 6;
-    -fx-cursor: hand;
-    /* Hiệu ứng focus nhẹ */
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0.1, 0, 0);
+    /* Hiệu ứng Neon Glow */
+    -fx-effect: dropshadow(three-pass-box, #00BCD4, 15, 0.5, 0, 0);
 }
 
 .button:hover {
-    -fx-background-color: #e5e5e5; /* Nền sáng nhẹ khi hover */
-    -fx-border-color: #1a73e8;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0.1, 0, 0);
+    -fx-background-color: rgba(0, 188, 212, 0.1);
+    -fx-effect: dropshadow(three-pass-box, #00BCD4, 25, 0.7, 0, 0);
 }
 
-/* Radio Buttons (Tự Động Chơi / Xem Cờ) */
+/* Radio Buttons */
 .radio-button {
-    -fx-text-fill: #333333; /* Chữ tối */
+    -fx-text-fill: #E0FFFF;
     -fx-padding: 4 0;
 }
 
 .radio-button .radio {
-    -fx-background-color: white; 
-    -fx-border-color: #1a73e8; /* Viền xanh */
+    -fx-background-color: transparent; 
+    -fx-border-color: #00BCD4; 
     -fx-border-radius: 100;
     -fx-border-width: 1.5;
 }
 
 .radio-button:selected .dot {
-    -fx-background-color: #1a73e8; /* Chấm tròn màu xanh đậm */
+    -fx-background-color: #FF3864; /* Chấm tròn màu Đỏ Neon */
+    -fx-effect: dropshadow(three-pass-box, #FF3864, 10, 0.8, 0, 0); 
 }
 
-/* --- 4. STATUS BAR (Thanh trạng thái dưới cùng) --- */
+/* Status Bar */
 .status-tool-bar {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #cccccc;
+    -fx-background-color: rgba(10, 20, 30, 0.6);
+    -fx-border-color: #00BCD4;
     -fx-border-width: 1px 0 0 0;
-    -fx-padding: 2 10 2 10;
-}
-
-.status-tool-bar .label {
-    -fx-text-fill: #333333;
 }
