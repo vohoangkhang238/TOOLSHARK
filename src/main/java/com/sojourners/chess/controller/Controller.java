@@ -88,8 +88,6 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     @FXML
     private ComboBox<String> engineComboBox;
 
-    // Đã xóa @FXML private ComboBox<String> linkComboBox;
-
     @FXML
     private ComboBox<String> hashComboBox;
 
@@ -112,7 +110,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     @FXML
     private RadioMenuItem menuOfCustomBoard;
     
-    // THÊM: RadioMenuItem mới cho Link Mode
+    // Link Mode Menu Items
     @FXML
     private RadioMenuItem menuOfAutoMoveMode;
     @FXML
@@ -158,6 +156,11 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     private Button pasteButton;
     @FXML
     private Button backButton;
+
+    // --- [ADDED] KHAI BÁO NÚT AUTO MOVE MỚI ---
+    @FXML
+    private Button autoMoveButton;
+    // ------------------------------------------
 
     @FXML
     private BorderPane charPane;
@@ -727,6 +730,21 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             stopGraphLink();
         }
     }
+    
+    // --- [ADDED] HÀM XỬ LÝ SỰ KIỆN NÚT AUTO MOVE ---
+    @FXML
+    private void autoMoveButtonClick(ActionEvent event) {
+        if (menuOfAutoMoveMode != null) {
+            // 1. Chọn chế độ trong menu
+            menuOfAutoMoveMode.setSelected(true);
+            
+            // 2. Kích hoạt logic chọn chế độ
+            linkModeSelected(new ActionEvent(menuOfAutoMoveMode, null));
+            
+            System.out.println("Đã kích hoạt Auto Move từ nút bấm.");
+        }
+    }
+    // -----------------------------------------------
 
     private void initLineChart() {
         final NumberAxis xAxis = new NumberAxis();
@@ -1118,6 +1136,8 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         addListener(reverseButton, isReverse);
         addListener(linkButton, linkMode);
         addListener(bookSwitchButton, useOpenBook);
+        // ADDED: Listener cho nút Auto Move mới
+        addListener(autoMoveButton, new SimpleObjectProperty<>(false)); // Tạm thời dùng dummy property để có hiệu ứng hover
 
         threadComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
