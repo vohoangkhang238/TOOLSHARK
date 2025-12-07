@@ -1,0 +1,63 @@
+/* File: src/main/resources/style/full-theme.css */
+
+/* 1. Global (Áp dụng cho toàn bộ cửa sổ) */
+.root {
+    -fx-background-color: #2c3e50; /* Nền xanh xám đậm */
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #ecf0f1;
+}
+
+/* 2. Thanh Menu Bar (Kết nối, Cài đặt) */
+.menu-bar {
+    -fx-background-color: #1a242f; /* Nền tối hơn */
+    -fx-border-color: #3e4f60;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Đảm bảo chữ trong Menu sáng màu */
+.menu-item .label, .menu .label {
+    -fx-text-fill: #ecf0f1; 
+}
+
+/* 3. Thanh Tool Bar (Chứa nút Tự động/Xem cờ) */
+.tool-bar {
+    -fx-background-color: #34495e; /* Màu xám xanh giữa */
+    -fx-spacing: 10;
+    -fx-padding: 3 8 3 8;
+}
+
+/* 4. Radio Buttons (Tự động/Xem cờ) */
+.radio-button {
+    -fx-text-fill: #ecf0f1; /* Chữ trắng */
+    -fx-padding: 4 0;
+}
+
+.radio-button .radio {
+    -fx-background-color: #ecf0f1; /* Nền vòng tròn trắng */
+    -fx-border-color: #3498db; /* Viền xanh */
+    -fx-border-radius: 100;
+    -fx-border-width: 1.5;
+}
+
+.radio-button:selected .dot {
+    -fx-background-color: #3498db; /* Chấm tròn màu xanh */
+}
+
+/* 5. Nút biểu tượng (Tạo mới, Kết nối) */
+.button {
+    -fx-background-color: transparent; /* Nền trong suốt */
+    -fx-padding: 3 6;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #557291; /* Hiệu ứng hover nhẹ */
+}
+
+/* 6. Thanh trạng thái (Status Bar) */
+.status-tool-bar {
+    -fx-background-color: #2c3e50; 
+    -fx-border-color: #3e4f60;
+    -fx-border-width: 1 0 0 0;
+}
