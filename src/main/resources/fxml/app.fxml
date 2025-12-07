@@ -156,8 +156,7 @@
                    <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
-                              <Canvas fx:id="canvas" height="650.0" onMouseClicked="#canvasClick" width="586.0" BorderPane.alignment="CENTER" />
-                           </center>
+<Canvas fx:id="canvas" height="1.0" onMouseClicked="#canvasClick" width="1.0" BorderPane.alignment="CENTER" />                           </center>
                         </BorderPane>
                         <ToolBar fx:id="statusToolBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="200.0" style="-fx-pref-height: 27px;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <items>
