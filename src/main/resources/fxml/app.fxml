@@ -131,13 +131,13 @@
                 
                 <Separator orientation="VERTICAL" />
                 
-                <RadioButton fx:id="radioAutoMove" text="Auto Move" selected="true" onAction="#radioModeChanged">
+                <RadioButton fx:id="radioAutoMove" text="Tự Động Chơi" selected="true" onAction="#radioModeChanged">
                     <toggleGroup>
                         <ToggleGroup fx:id="modeGroup" />
                     </toggleGroup>
                 </RadioButton>
 
-                <RadioButton fx:id="radioSpectator" text="Quan sát" toggleGroup="$modeGroup" onAction="#radioModeChanged" />
+                <RadioButton fx:id="radioSpectator" text="Xem Cờ" toggleGroup="$modeGroup" onAction="#radioModeChanged" />
                 <Button fx:id="copyButton" visible="false" />
                 <Button fx:id="pasteButton" visible="false" />
                 <Button fx:id="backButton" visible="false" />
