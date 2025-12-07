@@ -151,8 +151,7 @@
             </ToolBar>
          </top>
          <center>
-            <SplitPane fx:id="splitPane" dividerPositions="0.6416122004357299" stylesheets="@../style/split-pane.css" BorderPane.alignment="CENTER">
-              <items>
+<SplitPane fx:id="splitPane" dividerPositions="1.0" stylesheets="@../style/split-pane.css" BorderPane.alignment="CENTER">              <items>
                 <AnchorPane fx:id="canvasPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0">
                    <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
