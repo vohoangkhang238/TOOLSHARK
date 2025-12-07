@@ -88,8 +88,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     @FXML
     private ComboBox<String> engineComboBox;
 
-    @FXML
-    private ComboBox<String> linkComboBox;
+    // Đã xóa @FXML private ComboBox<String> linkComboBox;
 
     @FXML
     private ComboBox<String> hashComboBox;
@@ -112,6 +111,12 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     private RadioMenuItem menuOfDefaultBoard;
     @FXML
     private RadioMenuItem menuOfCustomBoard;
+
+    // THÊM: RadioMenuItem mới cho Link Mode
+    @FXML
+    private RadioMenuItem menuOfAutoMoveMode;
+    @FXML
+    private RadioMenuItem menuOfSpectatorMode;
 
     @FXML
     private CheckMenuItem menuOfStepTip;
@@ -666,6 +671,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
     @FXML
     void timeSettingButtonClick(ActionEvent e) {
+        // Tính năng này đã được ẩn khỏi menu chính.
         App.openTimeSetting();
     }
 
@@ -678,6 +684,15 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     void linkSettingClick(ActionEvent e) {
         App.openLinkSetting();
 
+    }
+
+    // THÊM: Phương thức mới để xử lý khi RadioMenuItem Link Mode được chọn
+    @FXML
+    void linkModeSelected(ActionEvent event) {
+        // Khi chế độ được chọn, nếu đang ở Link Mode, cập nhật ngay
+        if (linkMode.getValue()) {
+            setLinkMode();
+        }
     }
 
     @FXML
@@ -707,6 +722,8 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         linkMode.setValue(!linkMode.getValue());
         if (linkMode.getValue()) {
             graphLinker.start();
+            // THIẾT LẬP CHẾ ĐỘ MẶC ĐỊNH KHI BẬT
+            setLinkMode();
         } else {
             stopGraphLink();
         }
@@ -942,12 +959,18 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         } else {
             menuOfCustomBoard.setSelected(true);
         }
-        // 右键菜单
+        // Right-click menu (giữ nguyên logic)
         initBoardContextMenu();
         // 状态栏
         this.infoShowLabel.prefWidthProperty().bind(statusToolBar.widthProperty().subtract(120));
         this.timeShowLabel.setText(prop.getAnalysisModel() == Engine.AnalysisModel.FIXED_TIME ? "固定时间" + prop.getAnalysisValue() / 1000d + "s" : "固定深度" + prop.getAnalysisValue() + "层");
         this.statusToolBar.setVisible(prop.isLinkShowInfo());
+        
+        // Đặt chế độ Linker mặc định
+        if (menuOfAutoMoveMode != null) {
+            menuOfAutoMoveMode.setSelected(true);
+        }
+
 
         newChessBoard(null);
     }
@@ -957,19 +980,22 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             @Override
             public void handle(ActionEvent event) {
                 MenuItem item = (MenuItem) event.getTarget();
-                if ("复制局面FEN".equals(item.getText())) {
-                    copyButtonClick(null);
-                } else if ("粘贴局面FEN".equals(item.getText())) {
-                    pasteButtonClick(null);
-                } else if ("交换行棋方".equals(item.getText())) {
-                    switchPlayer(true);
-                } else if ("编辑局面".equals(item.getText())) {
-                    editChessBoardClick(null);
-                } else if ("复制局面图片".equals(item.getText())) {
-                    copyImageMenuClick(null);
-                } else if ("粘贴局面图片".equals(item.getText())) {
-                    pasteImageMenuClick(null);
-                }
+                /* Logic đã được xóa/comment do người dùng yêu cầu ẩn các tính năng
+                   (Copy/Paste FEN/Image, Edit Board, Swap Player) */
+                
+                // if ("复制局面FEN".equals(item.getText())) {
+                //     copyButtonClick(null);
+                // } else if ("粘贴局面FEN".equals(item.getText())) {
+                //     pasteButtonClick(null);
+                // } else if ("交换行棋方".equals(item.getText())) {
+                //     switchPlayer(true);
+                // } else if ("编辑局面".equals(item.getText())) {
+                //     editChessBoardClick(null);
+                // } else if ("复制局面图片".equals(item.getText())) {
+                //     copyImageMenuClick(null);
+                // } else if ("粘贴局面图片".equals(item.getText())) {
+                //     pasteImageMenuClick(null);
+                // }
             }
         });
     }
@@ -1076,8 +1102,9 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             e.printStackTrace();
         }
 
-        linkComboBox.getItems().addAll("自动走棋", "观战模式");
-        linkComboBox.setValue("自动走棋");
+        // Đã xóa logic ComboBox
+        // linkComboBox.getItems().addAll("自动走棋", "观战模式");
+        // linkComboBox.setValue("自动走棋");
     }
 
     private void refreshEngineComboBox() {
@@ -1133,21 +1160,26 @@ public class Controller implements EngineCallBack, LinkerCallBack {
                 }
             }
         });
+        // ĐÃ XÓA: Listener cho linkComboBox
+        /*
         linkComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 setLinkMode(t1);
             }
         });
+        */
     }
 
-    private void setLinkMode(String t1) {
+    // CẬP NHẬT: Hàm setLinkMode không nhận tham số, đọc từ RadioMenuItem
+    private void setLinkMode() {
         if (linkMode.getValue()) {
             // [MODIFIED] Bắt buộc vẽ lại bàn cờ theo trạng thái isReverse hiện tại 
             // mỗi khi chế độ liên kết được kích hoạt/thiết lập, để đảm bảo đồng bộ hóa
             board.reverse(isReverse.getValue());
             
-            if ("自动走棋".equals(t1)) {
+            // CẬP NHẬT LOGIC: Kiểm tra trạng thái của RadioMenuItem
+            if (menuOfAutoMoveMode.isSelected()) {
                 // 观战模式切换自动走棋，先停止引擎
                 engineStop();
                 // 走黑棋/红棋
@@ -1178,7 +1210,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
                         engineGo();
                     }
                 }
-            } else {
+            } else { // Chế độ xem (menuOfSpectatorMode.isSelected())
                 analysisButton.setDisable(false);
                 robotAnalysis.setValue(true);
 
@@ -1363,7 +1395,8 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             board.reverse(isReverseDetected);
 
             // 3. Initiate Link Mode
-            setLinkMode(linkComboBox.getValue());
+            // CẬP NHẬT: Gọi setLinkMode không tham số
+            setLinkMode();
 
             // 4. UI Thread: Resume Linker 
             graphLinker.resume();
@@ -1380,9 +1413,10 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         return this.isThinking;
     }
 
+    // CẬP NHẬT: isWatchMode() đọc trạng thái từ RadioMenuItem
     @Override
     public boolean isWatchMode() {
-        return "观战模式".equals(linkComboBox.getValue());
+        return menuOfSpectatorMode.isSelected();
     }
 
     // [FIXED] Thực thi phương thức isReverse() từ LinkerCallBack
@@ -1436,8 +1470,11 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         robotBlack.setValue(tmpBlack);
         robotAnalysis.setValue(tmpAnalysis);
         linkMode.setValue(tmpLink);
-
-        if (robotRed.getValue() && redGo || robotBlack.getValue() && !redGo || robotAnalysis.getValue()) {
+        
+        // CẬP NHẬT: Nếu ở Link Mode, gọi setLinkMode() mới
+        if (tmpLink) {
+            setLinkMode();
+        } else if (robotRed.getValue() && redGo || robotBlack.getValue() && !redGo || robotAnalysis.getValue()) {
             engineGo();
         }
     }
