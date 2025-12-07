@@ -36,7 +36,7 @@
           <Menu mnemonicParsing="false" text="Cục diện" visible="false">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#newButtonClick" text="Cục diện mới" />
-                                                                                                            <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="Nhập ảnh cục diện" />
+                                                                                                                              <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="Nhập ảnh cục diện" />
                   <MenuItem mnemonicParsing="false" onAction="#exportImageMenuClick" text="Xuất ảnh cục diện" />
                </items>
             </Menu>
@@ -51,7 +51,7 @@
             <Menu mnemonicParsing="false" text="Engine" visible="false">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#engineManageClick" text="Quản lý Engine" />
-                                 </items>
+                                                   </items>
             </Menu>
 
             <Menu mnemonicParsing="false" text="Kết nối">
@@ -129,6 +129,12 @@
                      </opaqueInsets>
                 </Button>
                 
+                <Button fx:id="linkButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#linkButtonClick" style="-fx-background-image: url('/image/link.png');" stylesheets="@../style/app.css" text="Kết nối">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                </Button>
+                  
                                   <Button fx:id="copyButton" contentDisplay="GRAPHIC_ONLY" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#copyButtonClick" style="-fx-background-image: url('/image/copy.png');" stylesheets="@../style/app.css" text="Sao chép" visible="false">
                      <opaqueInsets>
                         <Insets />
