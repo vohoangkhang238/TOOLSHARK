@@ -26,42 +26,46 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="文件">
+          <Menu mnemonicParsing="false" text="文件" visible="false">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#exit" text="退出" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="局面">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#newButtonClick" text="新局面" />
-                  <MenuItem mnemonicParsing="false" onAction="#editChessBoardClick" text="编辑局面" />
-                  <MenuItem mnemonicParsing="false" onAction="#copyButtonClick" text="复制局面FEN" />
-                  <MenuItem mnemonicParsing="false" onAction="#pasteButtonClick" text="粘贴局面FEN" />
-                  <MenuItem mnemonicParsing="false" onAction="#copyImageMenuClick" text="复制局面图片" />
-                  <MenuItem mnemonicParsing="false" onAction="#pasteImageMenuClick" text="粘贴局面图片" />
-                  <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="图片导入局面" />
-                  <MenuItem mnemonicParsing="false" onAction="#exportImageMenuClick" text="局面导出图片" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="开局库">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#bookSettingButtonClick" text="库招设置" />
-                  <MenuItem mnemonicParsing="false" onAction="#localBookManageButtonClick" text="本地库管理" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="引擎">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#engineManageClick" text="引擎管理" />
-                  <MenuItem mnemonicParsing="false" onAction="#timeSettingButtonClick" text="时间设置" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="连线">
-               <items>
-                  <MenuItem mnemonicParsing="false" onAction="#linkSettingClick" text="连线参数" />
-                  <CheckMenuItem fx:id="menuOfLinkBackMode" mnemonicParsing="false" onAction="#linkBackModeChecked" text="后台连线" />
-                  <CheckMenuItem fx:id="menuOfLinkAnimation" mnemonicParsing="false" onAction="#linkAnimationChecked" text="开启动画确认" />
-               </items>
-            </Menu>
+
+          <Menu mnemonicParsing="false" text="局面" visible="false">
+             <items>
+                <MenuItem mnemonicParsing="false" onAction="#newButtonClick" text="新局面" />
+                <MenuItem mnemonicParsing="false" onAction="#editChessBoardClick" text="编辑局面" />
+                <MenuItem mnemonicParsing="false" onAction="#copyButtonClick" text="复制局面FEN" />
+                <MenuItem mnemonicParsing="false" onAction="#pasteButtonClick" text="粘贴局面FEN" />
+                <MenuItem mnemonicParsing="false" onAction="#copyImageMenuClick" text="复制局面图片" />
+                <MenuItem mnemonicParsing="false" onAction="#pasteImageMenuClick" text="粘贴局面图片" />
+                <MenuItem mnemonicParsing="false" onAction="#importImageMenuClick" text="图片导入局面" />
+                <MenuItem mnemonicParsing="false" onAction="#exportImageMenuClick" text="局面导出图片" />
+             </items>
+          </Menu>
+
+          <Menu mnemonicParsing="false" text="开局库" visible="false">
+             <items>
+                <MenuItem mnemonicParsing="false" onAction="#bookSettingButtonClick" text="库招设置" />
+                <MenuItem mnemonicParsing="false" onAction="#localBookManageButtonClick" text="本地库管理" />
+             </items>
+          </Menu>
+
+          <Menu mnemonicParsing="false" text="引擎" visible="false">
+             <items>
+                <MenuItem mnemonicParsing="false" onAction="#engineManageClick" text="引擎管理" />
+                <MenuItem mnemonicParsing="false" onAction="#timeSettingButtonClick" text="时间设置" />
+             </items>
+          </Menu>
+
+          <Menu mnemonicParsing="false" text="连线">
+             <items>
+                <MenuItem mnemonicParsing="false" onAction="#linkSettingClick" text="连线参数" />
+                <CheckMenuItem fx:id="menuOfLinkBackMode" mnemonicParsing="false" onAction="#linkBackModeChecked" text="后台连线" />
+                <CheckMenuItem fx:id="menuOfLinkAnimation" mnemonicParsing="false" onAction="#linkAnimationChecked" text="开启动画确认" />
+             </items>
+          </Menu>
           <Menu mnemonicParsing="false" text="设置">
             <items>
                   <CheckMenuItem fx:id="menuOfStepTip" mnemonicParsing="false" onAction="#stepTipChecked" text="棋步提示" />
@@ -92,7 +96,7 @@
                         <RadioMenuItem fx:id="menuOfAutoFitBoard" mnemonicParsing="false" onAction="#boardSizeSelected" text="自适应" toggleGroup="$boardStyle" />
                     </items>
                   </Menu>
-            </items>
+             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="帮助">
             <items>
