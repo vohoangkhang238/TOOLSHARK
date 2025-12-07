@@ -32,8 +32,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.RadioButton; // Import RadioButton
+import javafx.scene.control.ToggleGroup; // Import ToggleGroup
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
@@ -56,7 +56,7 @@ import javafx.stage.FileChooser;
 import javafx.util.Callback;
 
 import javax.imageio.ImageIO;
-import java.awt.Desktop;
+import java.awt.Desktop; 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -111,7 +111,8 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     private RadioMenuItem menuOfDefaultBoard;
     @FXML
     private RadioMenuItem menuOfCustomBoard;
-
+    
+    // Link Mode Menu Items
     @FXML
     private RadioMenuItem menuOfAutoMoveMode;
     @FXML
@@ -158,12 +159,14 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     @FXML
     private Button backButton;
 
+    // --- [MỚI] KHAI BÁO RADIO BUTTONS VÀ GROUP ---
     @FXML
     private RadioButton radioAutoMove;
     @FXML
     private RadioButton radioSpectator;
     @FXML
     private ToggleGroup modeGroup;
+    // ----------------------------------------------
 
     @FXML
     private BorderPane charPane;
@@ -195,38 +198,47 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     private SimpleObjectProperty<Boolean> linkMode = new SimpleObjectProperty<>(false);
     private SimpleObjectProperty<Boolean> useOpenBook = new SimpleObjectProperty<>(false);
 
+    /**
+     * 走棋方
+     */
     private boolean redGo;
+
+    /**
+     * 正在思考（用于连线判断）
+     */
     private volatile boolean isThinking;
 
-    // --- [MỚI] Helper để lấy tỉ lệ chia màn hình an toàn (Tránh lỗi IndexOutOfBounds) ---
-    private double getSplitRatio() {
-        if (splitPane != null && splitPane.getDividers().size() > 0) {
-            return splitPane.getDividerPositions()[0];
-        }
-        return 1.0; // Mặc định full màn hình nếu không có thanh chia
-    }
-    // ----------------------------------------------------------------------------------
-
+    // --- [MỚI] HÀM XỬ LÝ CHUYỂN ĐỔI RADIO BUTTON ---
     @FXML
     private void radioModeChanged(ActionEvent event) {
+        // 1. Kiểm tra Radio Button nào được chọn
         if (radioAutoMove != null && radioAutoMove.isSelected()) {
+            System.out.println("Chế độ ToolBar: Auto Move được chọn.");
+            // 2. Kích hoạt RadioMenuItem tương ứng trong Menu
             if (menuOfAutoMoveMode != null) {
                 menuOfAutoMoveMode.setSelected(true);
+                // 3. Gọi logic xử lý chuyển chế độ
                 linkModeSelected(new ActionEvent(menuOfAutoMoveMode, null));
             }
+            
         } else if (radioSpectator != null && radioSpectator.isSelected()) {
+            System.out.println("Chế độ ToolBar: Quan sát được chọn.");
+            // 2. Kích hoạt RadioMenuItem tương ứng trong Menu
             if (menuOfSpectatorMode != null) {
                 menuOfSpectatorMode.setSelected(true);
+                // 3. Gọi logic xử lý chuyển chế độ
                 linkModeSelected(new ActionEvent(menuOfSpectatorMode, null));
             }
         }
     }
+    // --------------------------------------------------
 
     @FXML
     public void newButtonClick(ActionEvent event) {
         if (linkMode.getValue()) {
             stopGraphLink();
         }
+
         newChessBoard(null);
     }
 
@@ -257,10 +269,9 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         }
         board.setBoardSize(prop.getBoardSize());
         if (prop.getBoardSize() == ChessBoard.BoardSize.AUTOFIT_BOARD) {
-            board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), getSplitRatio(), prop.isLinkShowInfo());
+            board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), splitPane.getDividerPositions()[0], prop.isLinkShowInfo());
         }
     }
-
     @FXML
     void stepTipChecked(ActionEvent event) {
         CheckMenuItem item = (CheckMenuItem) event.getTarget();
@@ -309,7 +320,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         CheckMenuItem item = (CheckMenuItem) event.getTarget();
         prop.setLinkShowInfo(item.isSelected());
         statusToolBar.setVisible(item.isSelected());
-        board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), getSplitRatio(), prop.isLinkShowInfo());
+        board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), splitPane.getDividerPositions()[0], prop.isLinkShowInfo());
     }
 
     @FXML
@@ -363,11 +374,15 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     @FXML
     public void engineManageClick(ActionEvent e) {
         App.openEngineDialog();
+        // 重新设置引擎列表
         refreshEngineComboBox();
+        // 如果引擎被卸载，则关闭
         if (StringUtils.isEmpty(prop.getEngineName())) {
+            // 重置按钮
             robotRed.setValue(false);
             robotBlack.setValue(false);
             robotAnalysis.setValue(false);
+            // 关闭引擎
             if (engine != null) {
                 engine.close();
                 engine = null;
@@ -399,7 +414,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         // 2. Reset all state properties (on UI thread)
         redButton.setDisable(false);
         robotRed.setValue(false);
-
+        
         blackButton.setDisable(false);
         robotBlack.setValue(false);
 
@@ -407,7 +422,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         robotAnalysis.setValue(false);
 
         linkMode.setValue(false);
-
+        
         // 3. Stop the Linker background thread *last*
         graphLinker.stop();
     }
@@ -427,7 +442,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
         engine.setThreadNum(prop.getThreadNum());
         engine.setHashSize(prop.getHashSize());
-        // [MODIFIED] Bỏ ép về INFINITE khi ở chế độ Analysis/Spectator,
+        // [MODIFIED] Bỏ ép về INFINITE khi ở chế độ Analysis/Spectator, 
         // để engine luôn tuân thủ cài đặt thời gian/độ sâu mặc định của người dùng (tư duy giới hạn).
         engine.setAnalysisModel(prop.getAnalysisModel(), prop.getAnalysisValue());
         engine.analysis(fenCode, moveList.subList(0, p), this.board.getBoard(), redGo);
@@ -449,7 +464,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
             // Nếu tạo được nước đi hợp lệ
             if (move != null) {
-                // Nếu đang ở chế độ liên kết (Link Mode - bao gồm Quan chiến),
+                // Nếu đang ở chế độ liên kết (Link Mode - bao gồm Quan chiến), 
                 // gửi tín hiệu click ra bàn cờ bên ngoài
                 if (linkMode.getValue()) {
                     ChessBoard.Step step = board.stepForBoard(move);
@@ -462,7 +477,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             // Ẩn menu chuột phải (nếu đang mở)
             BoardContextMenu.getInstance().hide();
 
-            // Chuột phải: hiện menu context (copy/paste FEN, đổi bên đi, v.v.)
+        // Chuột phải: hiện menu context (copy/paste FEN, đổi bên đi, v.v.)
         } else if (event.getButton() == MouseButton.SECONDARY) {
             BoardContextMenu.getInstance().show(
                     this.canvas,
@@ -473,7 +488,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         }
     }
 
-
+    
     private void goCallBack(String move) {
         // [MODIFIED] Tối ưu hóa: Bỏ qua cập nhật giao diện để tăng tốc độ
         if (p == 0) {
@@ -487,18 +502,18 @@ public class Controller implements EngineCallBack, LinkerCallBack {
                 // [TẮT] lineChartSeries.getData().remove(i);
             }
         }
-
+        
         moveList.add(move);
         p++;
-
+        
         // [TẮT] int score = getScore();
         // [TẮT] recordTable.getItems().add(new ManualRecord(p, board.translate(move, true), score));
         // [TẮT] reLocationTable();
         // [TẮT] lineChartSeries.getData().add(new XYChart.Data<>(p, score > 1000 ? 1000 : (score < -1000 ? -1000 : score)));
-
+        
         // 切换行棋方
         redGo = !redGo;
-
+        
         // 触发引擎走棋
         if (redGo && robotRed.getValue() || !redGo && robotBlack.getValue() || robotAnalysis.getValue()) {
             engineGo();
@@ -518,7 +533,6 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             return recordTable.getItems().get(recordTable.getItems().size() - 1).getScore();
         }
     }
-
     private void reLocationTable() {
         recordTable.getSelectionModel().select(p);
         recordTable.scrollTo(p);
@@ -792,7 +806,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
                             body.setText(item.getBody());
                             body.setTextFill(Color.BLACK);
                             body.setWrapText(true);
-                            body.setMaxWidth(listView.getWidth() / 1.124);
+                            body.setMaxWidth(listView.getWidth() / 1.124);//bind(listView.widthProperty().divide(1.124));
                             box.getChildren().add(body);
 
                             setGraphic(box);
@@ -823,7 +837,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         initAutoFitBoardListener();
         // canvas drag listener
         initCanvasDragListener();
-
+        
         // [ADDED] Fix lỗi chớp chuột: Vô hiệu hóa event di chuyển chuột gây redraw.
         fixMouseFlicker();
 
@@ -838,19 +852,23 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
         // 2. Ép ẩn thanh bên phải và resize bàn cờ
         Platform.runLater(() -> {
-            // Kiểm tra an toàn trước khi set divider
-            if (splitPane != null && splitPane.getDividers().size() > 0) {
+            if (splitPane != null) {
                 splitPane.setDividerPositions(1.0);
             }
             // Gọi hàm autoFitSize ngay lập tức để bàn cờ co lại vừa khít cửa sổ nhỏ
             board.setBoardSize(ChessBoard.BoardSize.AUTOFIT_BOARD);
-            // SỬ DỤNG HÀM AN TOÀN getSplitRatio()
-            board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), getSplitRatio(), prop.isLinkShowInfo());
+            board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), 1.0, prop.isLinkShowInfo());
         });
     }
 
+    // [ADDED] Phương thức mới để khắc phục lỗi chớp chớp chuột
     private void fixMouseFlicker() {
-        this.canvas.setOnMouseMoved(event -> event.consume());
+        // Fix flickering by preventing redrawing on every mouse move event.
+        // Bất kỳ đoạn code nào trong ChessBoard.java lắng nghe sự kiện này sẽ bị ngăn chặn
+        // do chúng ta ghi đè bằng một hàm không làm gì cả.
+        this.canvas.setOnMouseMoved(event -> {
+            event.consume();
+        });
     }
 
     private void importFromBufferImage(BufferedImage img) {
@@ -869,6 +887,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             try {
                 BufferedImage img = ImageIO.read(f);
                 importFromBufferImage(img);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -886,20 +905,16 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         });
     }
 
-    // SỬA: Dùng hàm getSplitRatio() để an toàn hơn
     private void initAutoFitBoardListener() {
         borderPane.widthProperty().addListener((observableValue, number, t1) -> {
-            board.autoFitSize(t1.doubleValue(), borderPane.getHeight(), getSplitRatio(), prop.isLinkShowInfo());
+            board.autoFitSize(t1.doubleValue(), borderPane.getHeight(), splitPane.getDividerPositions()[0], prop.isLinkShowInfo());
         });
         borderPane.heightProperty().addListener((observableValue, number, t1) -> {
-            board.autoFitSize(borderPane.getWidth(), t1.doubleValue(), getSplitRatio(), prop.isLinkShowInfo());
+            board.autoFitSize(borderPane.getWidth(), t1.doubleValue(), splitPane.getDividerPositions()[0], prop.isLinkShowInfo());
         });
-        // Chỉ thêm listener cho Divider nếu nó tồn tại
-        if (splitPane != null && splitPane.getDividers().size() > 0) {
-            splitPane.getDividers().get(0).positionProperty().addListener((observableValue, number, t1) -> {
-                board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), t1.doubleValue(), prop.isLinkShowInfo());
-            });
-        }
+        splitPane.getDividers().get(0).positionProperty().addListener((observableValue, number, t1) -> {
+            board.autoFitSize(borderPane.getWidth(), borderPane.getHeight(), t1.doubleValue(), prop.isLinkShowInfo());
+        });
     }
 
     private void initBookTable() {
@@ -931,19 +946,12 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     }
 
     public void initStage() {
-        // [FIX] Sử dụng getSplitRatio() an toàn
-        prop.setStageWidth(borderPane.getWidth());
-        prop.setStageHeight(borderPane.getHeight());
-        
-        // An toàn khi set vị trí
-        if (splitPane != null && splitPane.getDividers().size() > 0) {
-            prop.setSplitPos(splitPane.getDividerPositions()[0]);
-            splitPane.setDividerPosition(0, prop.getSplitPos());
-        }
-        if (splitPane2 != null && splitPane2.getDividers().size() > 0) {
-            splitPane2.setDividerPosition(0, prop.getSplitPos2());
-        }
-        
+        borderPane.setPrefWidth(prop.getStageWidth());
+        borderPane.setPrefHeight(prop.getStageHeight());
+        splitPane.setDividerPosition(0, prop.getSplitPos());
+        splitPane2.setDividerPosition(0, prop.getSplitPos2());
+
+        // 窗口置顶
         menuOfTopWindow.setSelected(prop.isTopWindow());
         App.topWindow(prop.isTopWindow());
     }
@@ -958,7 +966,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         blackButton.setTooltip(new Tooltip("引擎执黑"));
         analysisButton.setTooltip(new Tooltip("分析模式"));
         immediateButton.setTooltip(new Tooltip("立即出招"));
-        linkButton.setTooltip(new Tooltip("Kết nối Auto"));
+        linkButton.setTooltip(new Tooltip("Kết nối Auto")); // Đã sửa Tooltip theo yêu cầu
         bookSwitchButton.setTooltip(new Tooltip("启用库招"));
 
     }
@@ -1000,7 +1008,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         this.infoShowLabel.prefWidthProperty().bind(statusToolBar.widthProperty().subtract(120));
         this.timeShowLabel.setText(prop.getAnalysisModel() == Engine.AnalysisModel.FIXED_TIME ? "固定时间" + prop.getAnalysisValue() / 1000d + "s" : "固定深度" + prop.getAnalysisValue() + "层");
         this.statusToolBar.setVisible(prop.isLinkShowInfo());
-
+        
         // Đặt chế độ Linker mặc định
         if (menuOfAutoMoveMode != null) {
             menuOfAutoMoveMode.setSelected(true);
@@ -1016,7 +1024,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
                 MenuItem item = (MenuItem) event.getTarget();
                 /* Logic đã được xóa/comment do người dùng yêu cầu ẩn các tính năng
                    (Copy/Paste FEN/Image, Edit Board, Swap Player) */
-
+                
                 // if ("复制局面FEN".equals(item.getText())) {
                 //     copyButtonClick(null);
                 // } else if ("粘贴局面FEN".equals(item.getText())) {
@@ -1109,7 +1117,6 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
         System.gc();
     }
-
     private void resetTable() {
         recordTable.getItems().clear();
         recordTable.getItems().add(new ManualRecord(p, "初始局面", 0));
@@ -1155,6 +1162,9 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         addListener(reverseButton, isReverse);
         addListener(linkButton, linkMode);
         addListener(bookSwitchButton, useOpenBook);
+        // ADDED: Listener cho nút Auto Move mới
+        // Xóa listener này vì nút autoMoveButton đã bị xóa
+        // addListener(autoMoveButton, new SimpleObjectProperty<>(false)); 
 
         threadComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -1193,30 +1203,52 @@ public class Controller implements EngineCallBack, LinkerCallBack {
                 }
             }
         });
+        // ĐÃ XÓA: Listener cho linkComboBox
+        /*
+        linkComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                setLinkMode(t1);
+            }
+        });
+        */
     }
 
+    // CẬP NHẬT: Hàm setLinkMode không nhận tham số, đọc từ RadioMenuItem
     private void setLinkMode() {
         if (linkMode.getValue()) {
+            // [MODIFIED] Bắt buộc vẽ lại bàn cờ theo trạng thái isReverse hiện tại 
+            // mỗi khi chế độ liên kết được kích hoạt/thiết lập, để đảm bảo đồng bộ hóa
             board.reverse(isReverse.getValue());
+            
+            // CẬP NHẬT LOGIC: Kiểm tra trạng thái của RadioMenuItem
             if (menuOfAutoMoveMode.isSelected()) {
+                // 观战模式切换自动走棋，先停止引擎
                 engineStop();
+                // 走黑棋/红棋
                 if (isReverse.getValue()) {
                     blackButton.setDisable(false);
                     robotBlack.setValue(true);
+
                     redButton.setDisable(true);
                     robotRed.setValue(false);
+
                     analysisButton.setDisable(true);
                     robotAnalysis.setValue(false);
+
                     if (!redGo) {
                         engineGo();
                     }
                 } else {
                     redButton.setDisable(false);
                     robotRed.setValue(true);
+
                     blackButton.setDisable(true);
                     robotBlack.setValue(false);
+
                     analysisButton.setDisable(true);
                     robotAnalysis.setValue(false);
+
                     if (redGo) {
                         engineGo();
                     }
@@ -1224,11 +1256,15 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             } else { // Chế độ xem (menuOfSpectatorMode.isSelected())
                 analysisButton.setDisable(false);
                 robotAnalysis.setValue(true);
+
                 blackButton.setDisable(true);
                 robotBlack.setValue(false);
+
                 redButton.setDisable(true);
                 robotRed.setValue(false);
+
                 immediateButton.setDisable(true);
+
                 engineGo();
             }
         }
@@ -1304,7 +1340,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     public void thinkDetail(ThinkData td) {
         if (redGo && robotRed.getValue() || !redGo && robotBlack.getValue() || robotAnalysis.getValue()) {
             td.generate(redGo, isReverse.getValue(), board);
-
+            
             // [MODIFIED] Tắt cập nhật UI cho suy nghĩ của engine
             /*
             if (td.getValid()) {
@@ -1374,14 +1410,8 @@ public class Controller implements EngineCallBack, LinkerCallBack {
 
         prop.setStageWidth(borderPane.getWidth());
         prop.setStageHeight(borderPane.getHeight());
-
-        // An toàn khi lưu
-        if (splitPane != null && splitPane.getDividers().size() > 0) {
-            prop.setSplitPos(splitPane.getDividerPositions()[0]);
-        }
-        if (splitPane2 != null && splitPane2.getDividers().size() > 0) {
-            prop.setSplitPos2(splitPane2.getDividerPositions()[0]);
-        }
+        prop.setSplitPos(splitPane.getDividerPositions()[0]);
+        prop.setSplitPos2(splitPane2.getDividerPositions()[0]);
 
         prop.save();
 
@@ -1397,20 +1427,20 @@ public class Controller implements EngineCallBack, LinkerCallBack {
     public void linkerInitChessBoard(String fenCode, boolean isReverseDetected) {
         // [MODIFIED] AGGRESSIVE SYNCHRONIZATION
         // 1. Pause Linker (on background thread)
-        graphLinker.pause();
+        graphLinker.pause(); 
 
         Platform.runLater(() -> {
             // 2. UI Thread: Update state
             newChessBoard(fenCode);
 
-            // Cập nhật biến isReverse và ép bàn cờ theo đúng trạng thái Linker tìm thấy
+            // Cập nhật biến isReverse和 ép bàn cờ theo đúng trạng thái Linker tìm thấy
             isReverse.setValue(isReverseDetected);
             board.reverse(isReverseDetected);
 
             // 3. Initiate Link Mode
             setLinkMode(); // CẬP NHẬT: Gọi setLinkMode không tham số
 
-            // 4. UI Thread: Resume Linker
+            // 4. UI Thread: Resume Linker 
             graphLinker.resume();
         });
     }
@@ -1474,7 +1504,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
             isReverse.setValue(tmpReverse);
             board.reverse(tmpReverse);
         }
-        // Nếu ở Link Mode, ta KHÔNG khôi phục isReverse.
+        // Nếu ở Link Mode, ta KHÔNG khôi phục isReverse. 
         // Logic Linker sẽ tự quét và gọi linkerInitChessBoard để đồng bộ trạng thái lật mới từ web.
 
         // 3. Khôi phục trạng thái robot và Link Mode
@@ -1482,7 +1512,7 @@ public class Controller implements EngineCallBack, LinkerCallBack {
         robotBlack.setValue(tmpBlack);
         robotAnalysis.setValue(tmpAnalysis);
         linkMode.setValue(tmpLink);
-
+        
         // CẬP NHẬT: Nếu ở Link Mode, gọi setLinkMode() mới
         if (tmpLink) {
             setLinkMode();
